@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/onlineclasses', function (Request $request) {
+    return $request->user();
 });
 
 Route::group(['middleware' => ['auth:api','cors', 'json.response']], function () {
-    Route::post('/login', 'Auth\ApiAuthController@login')->name('login.api');
-    Route::post('/register', 'Auth\ApiAuthController@register')->name('register.api');
-    Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+    Route::get('/onlineclasses', function() {
+        return "<img src='https://cdn.al-ain.com/lg/images/2020/11/30/100-153258-egyptian-alahly-fans-zamalek-anis-al-badri-3.jpeg' alt='القاضية ممكن'>"; 
+    });
 });
