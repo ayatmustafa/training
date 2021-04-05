@@ -1,13 +1,14 @@
-<?php
+<?php 
 namespace Modules\ConfigModule\Repositories;
 
 
-
-interface SchoolRepositoryInterface
-{
-    public function getSchools();
-    public function CreateSchool($schooldata);
-    public function editSchoolData($school_id);
-    public function UpdateSchool($school_id,$request);
-    public function deleteSchool($school_id);
+interface SchoolRepositoryInterface {
+    public function index();
+    public function show();
+    public function store($request);
+    public function getSchool($school);
+    public function edit($school);
+    public function update($request, $school);
+    public function destroy($school);    
 }
+?>

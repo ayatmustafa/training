@@ -2,22 +2,31 @@
 
 namespace Modules\ConfigModule\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
+use Modules\ConfigModule\Entities\SchoolTranslation;
 
-class School extends Model
+class School extends Model implements TranslatableContract
 {
-    
-
-    protected $fillable = ['name','address','logo','user_id','created_at','updated_at'];
-    protected $table = 'schools';
-    
-  //  protected static function newFactory()
-    // {
-    //     return \Modules\ConfigModule\Database\factories\SchoolFactory::new();
-    // }
-    public function division()
-    {
-      return $this->hasMany('Modules\ConfigModule\Entities\Division');
-    }
+  use Translatable;
+  public $useTranslationFallback = true;
+  protected $fillable = ['user_id', 'lat', 'lng', 'contacts'];
+  public $hidden = ['created_at', 'updated_at'];
+  public $translatedAttributes = ['long_name', 'short_name', 'branch_name', 'address'];
+  protected $casts = [
+      'contacts' => 'array'
+  ];
+  public function user() {
+      return $this->belongsTo(User::class, 'user_id');
+  }
+  public function schoolTranslations() {
+      return $this->hasMany(SchoolTranslation::class);
+  }
+  public function division()
+  {
+    return $this->hasMany(Division::class);
+  }
 }
+

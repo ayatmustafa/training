@@ -14,10 +14,6 @@ return [
         'en',
         'ar',
         'fr',
-        'es' => [
-            'MX', // mexican spanish
-            'CO', // colombian spanish
-        ],
     ],
 
     /*

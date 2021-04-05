@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Config\Entities;
+namespace Modules\ConfigModule\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\Config\Entities\School;
+use Modules\ConfigModule\Entities\School;
 
 class SchoolTranslation extends Model
 {
