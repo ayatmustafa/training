@@ -4,6 +4,7 @@ namespace Modules\ConfigModule\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\ConfigModule\Entities\Division;
 
 class ConfigModuleDatabaseSeeder extends Seeder
 {
@@ -14,8 +15,7 @@ class ConfigModuleDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
+      
         // $this->call("OthersTableSeeder");
     }
 }
