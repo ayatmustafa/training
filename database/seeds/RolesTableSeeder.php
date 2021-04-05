@@ -12,7 +12,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $superAdmin = Role::create([
+        $superAdmin = Role::firstOrCreate([
             'name' => 'SMD',
             'display_name' => 'SMD',
             'description' => 'can do anything in the project',

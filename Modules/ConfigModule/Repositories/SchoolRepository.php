@@ -2,48 +2,49 @@
 
 
 namespace Modules\ConfigModule\Repositories;
+use Illuminate\Support\Facades\Auth;
+use League\CommonMark\Util\ConfigurationInterface;
 use Modules\ConfigModule\Repositories\SchoolRepositoryInterface;
 
 use Modules\ConfigModule\Entities\School;
 class SchoolRepository implements SchoolRepositoryInterface
 {
-    public function getdivisions()
-    {
-        $schools=School::all();
-        return $schools;
+    private function getLocales($request) {
+        $data = [];
+        $lang = config('translatable.locales');
+        foreach($lang as $key) {
+            $data['short_name:'.$key]=$request->short_name;
+            $data['long_name:'.$key]=$request->long_name;
+            $data['branch_name:'.$key]=$request->branch_name;
+            $data['address:'.$key]=$request->address;
+        }
+        return $data;
     }
-
-    public function CreateSchool($schooldata)
-    {
-            $school= School::create($schooldata->all());
-            return   $school;
-        // $school=new School();
-        // $school->name = $request->input('name');
-        // $school->address = $request->input('address');
-        // $school->logo = $request->input('logo');
-        // $school->user_id=$request-> auth()->user()->id;
-        // $school->save();
+    public function index() {
+        return School::all();
     }
-
-    public function editSchoolData($school_id)
-    {
-        $school=School::find($school_id);
+    public function show() {
+        return School::with('user')->get();
+    }
+    public function getSchool($school) {
         return $school;
     }
-    public function UpdateSchool($school_id,$request)
-    {
-        $school=School::find($school_id);
-        // $school->name = $request->input('name');
-        // $school->address = $request->input('address');
-        // $school->logo = $request->input('logo');
-        // $school->user_id=$request-> auth()->user()->id;
-        $school->update($request->all()); 
-        return $school;   
-    }
-    public function deleteSchool($school_id)
-    {
-        $school=School::find($school_id);
-        $school->delete();
+    public function store($request) {
+        $data=$request->all();
+
+        $user = Auth::user()->id;
+        $data = array_merge($this->getLocales($request), ['user_id'=> $user]);
+        $school = School::create($data);
         return $school;
+    }
+    public function edit($school) {
+        return $school;
+    }
+    public function update($request, $school) {
+  
+        return $school->update($this->getLocales($request));
+    }
+    public function destroy($school) {
+        return $school->delete();
     }
 }
