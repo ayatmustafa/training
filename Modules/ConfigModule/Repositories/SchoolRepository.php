@@ -7,7 +7,7 @@ use Modules\ConfigModule\Repositories\SchoolRepositoryInterface;
 use Modules\ConfigModule\Entities\School;
 class SchoolRepository implements SchoolRepositoryInterface
 {
-    public function getSchools()
+    public function getdivisions()
     {
         $schools=School::all();
         return $schools;
