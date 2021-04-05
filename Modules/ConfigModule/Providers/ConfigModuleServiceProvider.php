@@ -39,7 +39,9 @@ class ConfigModuleServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->bind('Modules\ConfigModule\Repositories\SchoolRepositoryInterface','Modules\ConfigModule\Repositories\SchoolRepository');
- 
+        $this->app->bind('Modules\ConfigModule\Repositories\DivisionRepositoryInterface','Modules\ConfigModule\Repositories\DivisionRepository');
+        $this->app->bind('Modules\ConfigModule\Repositories\SectionRepositoryInterface','Modules\ConfigModule\Repositories\SectionRepository');
+
     }
 
     /**

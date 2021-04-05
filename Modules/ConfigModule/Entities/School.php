@@ -16,4 +16,8 @@ class School extends Model
     // {
     //     return \Modules\ConfigModule\Database\factories\SchoolFactory::new();
     // }
+    public function division()
+    {
+      return $this->hasMany('Modules\ConfigModule\Entities\Division');
+    }
 }
