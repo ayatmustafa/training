@@ -4,7 +4,7 @@ namespace Modules\ConfigModule\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Config\Entities\School;
+use Modules\ConfigModule\Entities\School;
 
 class SeedSchoolsSeederTableSeeder extends Seeder
 {
@@ -16,29 +16,32 @@ class SeedSchoolsSeederTableSeeder extends Seeder
     public function run()
     {
         School::create([
-            'name' => 'CBC',
-            'address' => 'Hatay2 ElAhram',
-            'logo' =>'',
-            'user_id'=>1,
+            'user_id' =>1,
+            'lat'=>'2654.2584',
+            'lng'=>'125.588565454698',
+            'contacts'=>['mobile'=>'011145826558',
+            'fax'=>'852077415'],
             'en' => [
                 'long_name' => "centeral",
                 'short_name'=>'NVIS',
-                'branch_name'=>'shekhzayed'
+                'branch_name'=>'shekhzayed',
+                'address'=>'shekhzayed',
             ]
             
         ]);
         School::create([
-            'name' => 'NVIS',
-            'address' => 'October',
-            'logo' =>'',
-            'user_id'=>1,
-            'en' => [
-                'long_name' => "New Vision International School",
-                'short_name'=>'NVIS',
-                'branch_name'=>'shekhzayed'
-            ]
-        ]);
-
+        'user_id' =>1,
+        'lat'=>'256.55889564',
+        'lng'=>'852.28774',
+        'contacts'=>['mobile'=>'46524854',
+        'fax'=>'854321048'],
+        'en' => [
+            'long_name' => "centrlaization ",
+            'short_name'=>'CBC',
+            'branch_name'=>'hadyk elahram',
+            'address'=>'hadyk elahram',
+        ]
+            ]);
         // $this->call("OthersTableSeeder");
     }
 }

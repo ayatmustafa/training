@@ -17,7 +17,7 @@ class DivisionController extends Controller
     public function getdivisions()
     {
         $getdivision = $this->DivisionRepository->getdivisions();
-        $data = ["status" => "success", "data" =>$getdivision];
+        $data = ["status" => "success", "data" =>DivisionResource::collection($getdivision)];
         return response()->json($data, 200);
     }
 
