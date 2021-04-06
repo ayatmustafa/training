@@ -34,13 +34,12 @@ class CreateStudentsTable extends Migration
             $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');
           
             $table->bigInteger('grade_id')->unsigned();
-            $table->foreign('grade_id')->references('id')->on('grade')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('no action')->onUpdate('no action');
           
             $table->bigInteger('school_id')->unsigned();
-            $table->foreign('school_id')->references('id')->on('school')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('no action')->onUpdate('no action');
 
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('no action');
+            $table->foreignId('user_id')->constrained();
 
             $table->timestamps();
         });
