@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\ConfigModule\Http\Controllers;
-use Modules\ConfigModule\Transformers\DivisionResource;
+
 use Modules\ConfigModule\Repositories\DivisionRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class DivisionController extends Controller
     public function getdivisions()
     {
         $getdivision = $this->DivisionRepository->getdivisions();
-        $data = ["status" => "success", "data" =>DivisionResource::collection($getdivision)];
+        $data = ["status" => "success", "data" => $getdivision];
         return response()->json($data, 200);
     }
 

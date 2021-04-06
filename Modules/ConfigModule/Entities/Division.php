@@ -17,8 +17,5 @@ class Division extends Model implements TranslatableContract
     {
         return $this->hasMany('Modules\ConfigModule\Entities\Section');
     }
-    public function Grade()
-    {
-        return $this->hasMany('Modules\ConfigModule\Entities\Grade');
-    }
+    
 }
