@@ -13,9 +13,10 @@ class CreateDivisionTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Division_translations', function (Blueprint $table) {
+        Schema::create('division_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('locale')->index();
             $table->bigInteger('division_id')->unsigned();
             $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');
           $table->timestamps();
