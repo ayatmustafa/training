@@ -17,8 +17,5 @@ class Section extends Model implements TranslatableContract
     {
         return $this->belongsTo('Modules\ConfigModule\Entities\Division','division_id');
     }
-    public function Grade()
-    {
-        return $this->hasMany('Modules\ConfigModule\Entities\Grade');
-    }
+    
 }
