@@ -57,5 +57,14 @@ Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD
         Route::get('/get-Sections/indivision/{id}','SectionController@getSectionByDivision');
         Route::post('/changeStatuss','SectionController@changeStatus');
     });
+    Route::group(['prefix' => '/Grade'], function () {
 
+        Route::post('/create','GradeController@createGrade');
+        Route::get('/getall','GradeController@GetAllGrades');
+        Route::get('/get/{grade_id}','GradeController@getGrade');
+        Route::get('/getsection/{grade_id}','GradeController@getGradeSection');
+        Route::post('/addsection/{grade_id}','GradeController@AddGradeSection');
+        Route::post('/update/{grade_id}','GradeController@updateGrade');
+
+    });
 });

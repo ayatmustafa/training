@@ -9,8 +9,8 @@ class DivisionTranslation extends Model
 {
     
 
-    protected $fillable = ['name','division_id'];
-    protected $table = 'Divisions_translations';
+    protected $fillable = ['name','division_id',"locale"];
+    protected $table = 'division_translations';
     public $timestamps = false;
    
 }
