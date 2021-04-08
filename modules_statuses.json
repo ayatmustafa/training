@@ -1,4 +1,5 @@
 {
     "Config": true,
-    "ConfigModule": true
+    "ConfigModule": true,
+    "Student": true
 }

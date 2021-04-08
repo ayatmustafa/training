@@ -11,12 +11,27 @@ class UsersTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $user = User::create([
-            'name' => 'SMD',
-            'email' => 'SMD@app.com',
+    {   
+
+        $user = User::firstOrCreate([
+            'email' => 'SMD@app.com'
+        ],
+            ['name' => 'SMD',
+            
             'password' => bcrypt('12345678'),
         ]);
-        $user->attachRole('SMD');
+        $user->roles()->sync([]);
+        $user->syncRoles(["SMD"]);
+        //$user->attachRole('SMD');
+
+        $student=User::firstOrCreate([
+            'email'=>'hebamohey172@gmail.com',
+        ],[
+            'name'=>'heba',
+            
+            'password'=>bcrypt('12345678')
+        ]);
+        $student->roles()->sync([]);
+        $student->syncRoles(["Student"]);
     } // en of run
 } // end of seeder
