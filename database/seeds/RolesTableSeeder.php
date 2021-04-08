@@ -17,5 +17,10 @@ class RolesTableSeeder extends Seeder
             'display_name' => 'SMD',
             'description' => 'can do anything in the project',
         ]);
+         Role::firstOrCreate([
+            'name' => 'Student',
+            'display_name' => 'Student',
+            'description' => 'entires student side',
+        ]);
     }
 }
