@@ -21,9 +21,9 @@ class School extends Model implements TranslatableContract
   public function user() {
       return $this->belongsTo(User::class, 'user_id');
   }
-  public function schoolTranslations() {
-      return $this->hasMany(SchoolTranslation::class);
-  }
+  // public function schoolTranslations() {
+  //     return $this->hasMany(SchoolTranslation::class);
+  // }
   public function division()
   {
     return $this->hasMany(Division::class);

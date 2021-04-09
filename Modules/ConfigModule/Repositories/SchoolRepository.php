@@ -42,7 +42,7 @@ class SchoolRepository implements SchoolRepositoryInterface
     }
     public function update($request, $school) {
   
-        return $school->update($this->getLocales($request));
+        return $school->update($request->all());
     }
     public function destroy($school) {
         return $school->delete();
