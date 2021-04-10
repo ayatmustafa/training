@@ -88,7 +88,7 @@ class DivisionSubjectController extends Controller
         $updateDivisionSubject = $this->divisionSubject->update($request, $id);
         return response()->json([
             "status" => "status",
-            "data"   => new DivisionSubjectResource($updateDivisionSubject)
+            "data"   => $updateDivisionSubject !== null ? new DivisionSubjectResource($updateDivisionSubject) : $updateDivisionSubject
         ]);
     }
 

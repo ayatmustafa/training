@@ -21,15 +21,7 @@ class DivisionSubjectRepository implements DivisionSubjectRepositoryInterface
         return  $this->divisionSubject->get();
     }
     public function show($id) {
-        try
-        {
-                return $divisionSubject = $this->divisionSubject->find($id);
-        }
-        catch(ModelNotFoundException $e)
-        {
-            dd(get_class_methods($e)); // lists all available methods for exception object
-            dd($e);
-        }
+            return $this->divisionSubject->find($id);
     }
 
     public function store($request) {    
@@ -44,9 +36,12 @@ class DivisionSubjectRepository implements DivisionSubjectRepositoryInterface
         return $divisionSubject;
     }
     public function update($request,$id) {
-        $divisionSubject = $this->divisionSubject->find($id);
+       return  $divisionSubject = $this->divisionSubject->find($id);
         if($divisionSubject !== null){
             $divisionSubject->update($request->all());
+            foreach($request->gradeIds as $gradeId){
+                $divisionSubject->grades()->update(["grade_id" => $gradeId]);
+            }
             return$divisionSubject;
         }
         return "not exists";
