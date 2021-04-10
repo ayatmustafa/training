@@ -46,10 +46,10 @@ class ClassesController extends Controller
      */
 public function store(ClassesRequest $request)
     {
-        $storeClasses = $this->classes->store($request);
+        $storeClass = $this->classes->store($request);
         return response()->json([
             'status' => 'success',
-            'data'   => new ClassesResource($storeClasses)
+            'data'   => new ClassesResource($storeClass)
         ]);
     }
 
@@ -85,7 +85,11 @@ public function store(ClassesRequest $request)
      */
     public function update(ClassesUpdateRequest $request, $id)
     {
-        
+        $updateClass = $this->classes->update($request, $id);
+        return response()->json([
+            'status' => 'success',
+            'data'   => $updateClass,
+        ]);
     }
 
     /**
@@ -95,6 +99,10 @@ public function store(ClassesRequest $request)
      */
     public function destroy($id)
     {
-        //
+        $updateClass = $this->classes->destroy($id);
+        return response()->json([
+            'status' => 'success',
+            'data'   => $updateClass,
+        ]);
     }
 }

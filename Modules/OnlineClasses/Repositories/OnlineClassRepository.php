@@ -3,11 +3,9 @@
 
 namespace Modules\OnlineClasses\Repositories;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Modules\OnlineClasses\Repositories\OnlineClassRepositoryInterface;
 use Modules\OnlineClasses\Entities\OnlineClass;
-use Modules\OnlineClasses\Entities\ZoomOnlineClass;
 use Modules\OnlineClasses\Traits\ZoomJWT;
 
 class OnlineClassRepository implements OnlineClassRepositoryInterface
@@ -65,9 +63,28 @@ class OnlineClassRepository implements OnlineClassRepositoryInterface
         return $onlineClasses;
     }
     public function update($request,$id) {
-        $onlineClass = $this->onlineClass->find($id);
-        if($onlineClass !== null)
-            return $onlineClass->update($request->all());
+         $onlineClasses = $this->onlineClass->find($id);
+        if($onlineClasses !== null) {
+            $path = 'meetings/' . $onlineClasses->zoom_meeting_id;
+            $response = $this->zoomPatch($path, [
+                'type' => self::MEETING_TYPE_SCHEDULE,
+                'zoom_meeting_start_time' => (new \DateTime($request['zoom_meeting_start_time']))->format('Y-m-d'),
+                'duration' => 40,
+                'settings' => [
+                    'host_video' => false,
+                    'participant_video' => false,
+                    'waiting_room' => true,
+                ]
+            ]);
+             $zoom_response =  json_decode($response);
+             $zoom_online_class = [
+                 "start_time" => $request->zoom_meeting_start_time,
+             ];
+             $data = array_merge($request->all(), ["user_id"=> Auth::user()->id, $zoom_online_class]);
+            $onlineClasses->update($data);
+            return $onlineClasses;
+        }
+            
         return "not exists";
     }
     public function destroy($id) {

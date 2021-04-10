@@ -29,6 +29,7 @@ class DivisionRepository implements DivisionRepositoryInterface
         $data               =$request->all();
         $data['school_id']  = $request->school_id;
         $division           =Division::create($data);
+        // $divition->attachrole("student")
         return $division;
 
     }

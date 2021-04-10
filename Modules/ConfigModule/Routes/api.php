@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\ConfigModule\Http\Controllers\ClassesController;
+use Modules\ConfigModule\Http\Controllers\DivisionSubjectController;
 use Modules\ConfigModule\Http\Controllers\SchoolController;
 
 /*
@@ -44,11 +45,20 @@ Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD
     Route::group(['prefix' => '/class'], function() {
         Route::get('/index',             [ClassesController::class, 'index']);
         Route::get('/show/{class}',      [ClassesController::class, 'show']);
-        Route::get('/edit/{class}',      [ClassesController::class, 'edit']);
         Route::post('/store',            [ClassesController::class, 'store']);
         Route::post('/update/{class}',   [ClassesController::class, 'update']);
         Route::delete('/delete/{class}', [ClassesController::class, 'destroy']);
     });
+/*----------------------------------------------------------------------------
+|                               DivisionSubject CRUD APIs                            |
+|--------------------------------------------------------------------------*/
+Route::group(['prefix' => '/DivisionSubject'], function() {
+    Route::get('/index',                  [DivisionSubjectController::class, 'index']);
+    Route::get('/show/{class}',           [DivisionSubjectController::class, 'show']);
+    Route::post('/store',                 [DivisionSubjectController::class, 'store']);
+    Route::post('/update/{divSubject}',   [DivisionSubjectController::class, 'update']);
+    Route::delete('/delete/{divSubject}', [DivisionSubjectController::class, 'destroy']);
+});
 
     Route::group(['prefix' => '/division'], function () {
         Route::get('/getdivisions','DivisionController@getdivisions');
@@ -70,5 +80,14 @@ Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD
         Route::get('/get-Sections/indivision/{id}','SectionController@getSectionByDivision');
         Route::post('/changeStatuss','SectionController@changeStatus');
     });
+    Route::group(['prefix' => '/Grade'], function () {
 
+        Route::post('/create','GradeController@createGrade');
+        Route::get('/getall','GradeController@GetAllGrades');
+        Route::get('/get/{grade_id}','GradeController@getGrade');
+        Route::get('/getsection/{grade_id}','GradeController@getGradeSection');
+        Route::post('/addsection/{grade_id}','GradeController@AddGradeSection');
+        Route::post('/update/{grade_id}','GradeController@updateGrade');
+
+    });
 });

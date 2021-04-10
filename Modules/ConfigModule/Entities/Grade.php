@@ -5,15 +5,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
+
     protected $fillable = ['name','division_id','section_id'];
-    protected $hidden   = ['created_at', 'updated_at'];
-    public function section() {
-        return $this->belongsTo(Section::class);
+    protected $table ='grades';
+    public $timestamps = true;
+
+    public function section()
+    {
+        return $this->belongsTo('Modules\ConfigModule\Entities\Section');
     }
-    public function classes() {
-        return $this->hasMany(Classes::class);
+    public function Division()
+    {
+        return $this->belongsTo('Modules\ConfigModule\Entities\Division');
     }
-    public function subjects() {
-        return $this->hasMany(GradeSubject::class);
-    }
+    
 }

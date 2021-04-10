@@ -22,5 +22,10 @@ class RolesTableSeeder extends Seeder
             'display_name' => 'teacher',
             'description' => 'create online classes',
         ]);   
+         Role::firstOrCreate([
+            'name' => 'Student',
+            'display_name' => 'Student',
+            'description' => 'entires student side',
+        ]);
     }
 }

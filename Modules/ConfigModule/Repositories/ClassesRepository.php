@@ -19,7 +19,7 @@ class ClassesRepository implements ClassesRepositoryInterface
         return Classes::all();
     }
     public function show($id) {
-        return $this->classes->find($id);
+        return $this->classes-> find($id);
     }
     public function store($request) {    
         $data=  array_merge($request->all(), ['user_id' => Auth::user()->id]);
@@ -27,9 +27,11 @@ class ClassesRepository implements ClassesRepositoryInterface
         return $classes;
     }
     public function update($request,$id) {
-        $classes = $this->classes->find($id);
-        if($classes !== null)
-            return $classes->update($request->all());
+        $classes = Classes::whereId($id)->first();
+        if($classes !== null){
+            $classes->update($request->all());
+            return $classes;
+        }
         return "not exists";
     }
     public function destroy($id) {

@@ -29,6 +29,6 @@ class CreateDivisionSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('division__subjects');
+        Schema::dropIfExists('division_subjects');
     }
 }

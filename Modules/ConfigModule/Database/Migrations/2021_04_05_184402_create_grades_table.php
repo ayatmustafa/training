@@ -14,12 +14,15 @@ class CreateGradesTable extends Migration
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->foreignId('division_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->biginteger('division_id')->unsigned();
+            $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');;
+            $table->bigInteger('section_id')->unsigned();
+            $table->foreign('section_id')->references('id')->on('Sections')->onDelete('no action')->onUpdate('no action');
             $table->timestamps();
         });
+       
     }
 
     /**

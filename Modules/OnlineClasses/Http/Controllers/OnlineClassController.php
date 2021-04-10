@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\OnlineClasses\Http\Requests\OnlineClassRequest;
+use Modules\OnlineClasses\Http\Requests\OnlineClassUpdateRequest;
 use Modules\OnlineClasses\Repositories\OnlineClassRepositoryInterface;
 use Modules\OnlineClasses\Transformers\OnlineClassResource;
 
@@ -48,8 +49,8 @@ class OnlineClassController extends Controller
         $storeOnlineClass = $this->onlineClass->store($request);
         return response()->json([
             'status' => 'success',
-            'data'   => $storeOnlineClass
-            // 'data'   => new OnlineClassResource($storeOnlineClass)
+            // 'data'   => $storeOnlineClass
+            'data'   => new OnlineClassResource($storeOnlineClass)
         ]);
     }
 
@@ -83,12 +84,14 @@ class OnlineClassController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(OnlineClassUpdateRequest $request, $id)
     {
         $updateOnlineClass = $this->onlineClass->update($request, $id);
         return response()->json([
             'status' => 'success',
-            'message'   => $updateOnlineClass
+            // 'data'   => $updateOnlineClass
+            'data'   => new OnlineClassResource($updateOnlineClass)
+            
         ]);
     }
 
