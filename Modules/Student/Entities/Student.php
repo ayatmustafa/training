@@ -2,11 +2,13 @@
 
 namespace Modules\Student\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Modules\ConfigModule\Entities\Classes;
 
-class Student extends Model
+class Student extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -31,12 +33,14 @@ class Student extends Model
    {
        return $this->belongsTo('Modules\ConfigModule\Entities\Grade','grade_id');
    }
-   public function User()
-   {
-       return $this->belongsTo('App\Models\User');
+   public function user() {
+    return $this->belongsTo(User::class);
    }
    public function sections()
    {
        return $this->belongsTo('Modules\ConfigModule\Entities\section');
+   }
+   public function class() {
+       return $this->belongsTo(Classes::class);
    }
 }

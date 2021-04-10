@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-use Modules\ConfigModule\Entities\SchoolTranslation;
 
 class School extends Model implements TranslatableContract
 {
@@ -20,9 +19,6 @@ class School extends Model implements TranslatableContract
   ];
   public function user() {
       return $this->belongsTo(User::class, 'user_id');
-  }
-  public function schoolTranslations() {
-      return $this->hasMany(SchoolTranslation::class);
   }
   public function division()
   {
