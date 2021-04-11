@@ -3,6 +3,7 @@
 
 namespace Modules\Student\Repositories;
 
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth;
 use Modules\ConfigModule\Entities\Division;
 use Modules\Student\Repositories\StudentRepositoryInterface;
@@ -10,48 +11,41 @@ use Modules\Student\Entities\Student;
 
 class StudentRepository implements StudentRepositoryInterface
 {
-    public function createStudent($studentData)
+    public function create($studentData)
     {
         $user = Auth::user()->id;
-        $student = create(array_merge($studentData->all(), $user));
-        return $student;
+      return Student::create(array_merge($studentData->all(),['user_id'=> $user]));
+
     }
-    public function getAllStudents()
+    public function index()
     {
-        $students = Student::all();
-        return $students;
+      return Student::all();
     }
-    public function editStudent($student_id)
+    public function edit($student_id)
     {
-        //    $student=Student::find($student_id);
-        //    return $student;
-        $student = Student::where('id', $student_id)->first();
-        return $student;
+       
+        return Student::where('id', $student_id)->first();
     }
-    public function UpdateStudent($student_id, $studentdata)
+    public function Update($student_id, $studentdata)
     {
         $student = Student::where('id', $student_id)->first();
-        $student->update($studentdata->all());
-        return $student;
+      $student->update($studentdata->all());
+      return    $student; 
     }
     public function StudentsInDivision($division_id)
     {
-        $students = Student::where('division_id', $division_id)->get();
-        return $students;
+      return Student::where('division_id', $division_id)->get();
     }
     public function StudentsInSection($section_id)
     { 
-        $students=Student::where('section_id',$section_id)->get();
-        return $students;
+        return Student::where('section_id',$section_id)->get();
     }
     public function StudentsInGrade($grade_id)
     {
-        $students=Student::where('grade_id',$grade_id);
-        return $students;
+       return Student::where('grade_id',$grade_id);
     }
     public function AddStudentToGrade($id,$req)
     {
-    $student=Student::where('id',$id)->update(['grade_id'=>$req->grade_id]);
-    return $student;
+     return Student::where('id',$id)->update(['grade_id'=>$req->grade_id]);
     }
 }

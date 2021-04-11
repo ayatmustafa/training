@@ -33,5 +33,33 @@ class UsersTableSeeder extends Seeder
         ]);
         $student->roles()->sync([]);
         $student->syncRoles(["Student"]);
+
+
+
+
+       $student1= User::firstOrCreate([
+            'email'=>'ahmed.nabil65@gmail.com',
+            
+        ],[
+            'name'=>'Ahmed',
+            
+            'password'=>bcrypt('12345678')
+        ]);
+        $student1->roles()->sync([]);
+        $student1->syncRoles(["Student"]);
+
+
+
+
+       $student2= User::firstOrCreate([
+            'email'=>'omar.nabil65@gmail.com',
+        ],[
+            'name'=>'Omar',
+            
+            'password'=>bcrypt('12345678')
+        ]);
+        $student2->roles()->sync([]);
+        $student2->syncRoles(["Student"]);
+
     } // en of run
 } // end of seeder
