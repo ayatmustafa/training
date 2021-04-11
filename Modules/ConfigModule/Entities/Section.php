@@ -11,6 +11,7 @@ class Section extends Model implements TranslatableContract
 
     use Translatable;
     protected $fillable = ['status','division_id'];
+    protected $hidden  = ['created_at', 'updated_at'];
     public $translatedAttributes = ['name'];
 
     public function division()

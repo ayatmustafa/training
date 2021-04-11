@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\ConfigModule\Entities\School;
 use Laratrust\Traits\LaratrustUserTrait;
+use Modules\OnlineClasses\Entities\OnlineClass;
+use Modules\Student\Entities\Student;
 
 class User extends Authenticatable  
 {
@@ -43,6 +45,12 @@ class User extends Authenticatable
     ];
     public function schools() {
         return $this->hasMany(School::class);
+    }
+    public function onlineClasses() {
+        return $this->hasMany(OnlineClass::class);
+    }
+    public function student() {
+        return $this->belongsTo(Student::class, 'user_id');
     }
 }
 

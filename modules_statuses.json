@@ -1,5 +1,6 @@
 {
     "Config": true,
     "ConfigModule": true,
+    "OnlineClasses": true,
     "Student": true
 }

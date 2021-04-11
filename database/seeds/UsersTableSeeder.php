@@ -11,6 +11,19 @@ class UsersTableSeeder extends Seeder
      * @return void
      */
     public function run()
+    {
+        $smd = User::create([
+            'name' => 'SMD',
+            'email' => 'SMD@app.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $smd->attachRole('SMD');
+        $teacher = User::create([
+            'name' => 'Teacher',
+            'email' => 'teacher@app.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $teacher->attachRole('TEACHER');
     {   
 
         $user = User::firstOrCreate([
@@ -63,3 +76,4 @@ class UsersTableSeeder extends Seeder
 
     } // en of run
 } // end of seeder
+}

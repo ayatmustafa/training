@@ -13,6 +13,8 @@ class Division extends Model implements TranslatableContract
     use Translatable;
     protected $fillable = ['logo','school_id'];
     public $translatedAttributes = ['name'];
+    protected $hidden   =  ['created_at', 'updated_at'];
+
     public function Section()
     {
         return $this->hasMany('Modules\ConfigModule\Entities\Section');
@@ -20,6 +22,9 @@ class Division extends Model implements TranslatableContract
     public function Grade()
     {
         return $this->hasMany('Modules\ConfigModule\Entities\Grade');
+    }
+    public function division_subject() {
+        return $this->hasMany(DivisionSubject::class);
     }
     public function students()
     {
