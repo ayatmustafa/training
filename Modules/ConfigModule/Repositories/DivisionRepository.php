@@ -10,40 +10,37 @@ use Modules\ConfigModule\Repositories\DivisionRepositoryInterface;
 // rename all functions like in ClassesRepository
 class DivisionRepository implements DivisionRepositoryInterface
 {
-    public function getdivisions()
+    public function index()
     {
         // this could be return Division::all(); no need to define variable
-        $division = Division::all();
-        return $division;
+      return  Division::all();
+      
     }
-
-
-    public function DivisionByschoolID($school_id)
+    public function divisionBySchoolId($school_id)
     {
         // enhancement try to ask ayat for help here this is the DivisionRepository we should not call School Model
         // this logic should api should call the SchoolController -> SchoolRepository to get divisions via School Model relationship
-        $school_id = School::find($school_id);
-        $divisions = $school_id->division;
-        return $divisions;
+       
+        return Division::where('school_id',$school_id)->get();
+     
     }
-    public function createDivision($request)
+
+   
+    public function create($request)
      {
          // enhancement there should be no commented code
-    //     $division=Division::create($DivisionData->all());
-    //     return $division;
+ 
         $data               =$request->all();
         $data['school_id']  = $request->school_id;
         $division           =Division::create($data);
-        // $divition->attachrole("student")
         return $division;
 
     }
-    public function editDivisionData($division_id)
+    public function edit($division_id)
     {
-        $division=School::find($division_id);
-        return $division;
+        return School::find($division_id);
     }
-    public function UpdateDivision($request,$Division_id)
+    public function Update($request,$Division_id)
     {
         $division=Division::where('id',$Division_id)->first();
         $division->logo=$request->input('logo');

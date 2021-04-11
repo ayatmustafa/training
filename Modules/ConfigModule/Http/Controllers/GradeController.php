@@ -19,21 +19,21 @@ class GradeController extends Controller
     {
         $this->GradeRepository = $GradeRepository;
     }
-    public function createGrade(GradeRequest $request)
+    public function store(GradeRequest $request)
     {
-        $grade = $this->GradeRepository->createGrade($request);
+        $grade = $this->GradeRepository->store($request);
         $data = ["status" => "success", "data" => new GradeResource($grade)];
         return response()->json($data, 200);
     }
-    public function GetAllGrades()
+    public function index()
     {
-        $grade = $this->GradeRepository->GetAllGrades();
+        $grade = $this->GradeRepository->index();
         $data = ["status" => "success", "data" => GradeResource::collection($grade)];
         return response()->json($data, 200);
     }
-    public function getGrade($grade_id)
+    public function show($grade_id)
     {
-        $grade = $this->GradeRepository->getGrade($grade_id);
+        $grade = $this->GradeRepository->show($grade_id);
         $data = ["status" => "success", "data" => new GradeResource($grade)];
         return response()->json($data, 200);
     }
@@ -42,17 +42,16 @@ class GradeController extends Controller
         $grade = $this->GradeRepository->getGradeSection($grade_id);
         $data = ["status" => "success", "data" => ($grade)];
         return response()->json($data, 200);
-        //new GradeResource
     }
-    public function AddGradeSection($grade_id,Request $request)
+    public function addGradeSection($grade_id,Request $request)
     {
-        $grade = $this->GradeRepository->AddGradeSection($grade_id, $request);
+        $grade = $this->GradeRepository->addGradeSection($grade_id, $request);
         $data = ["status" => "success", "data" => ($grade)];
         return response()->json($data, 200);
     }
-    public function updateGrade(GradeRequest $gradeData,$grade_id)
+    public function update(GradeRequest $gradeData,$grade_id)
     {
-        $grade = $this->GradeRepository->updateGrade($gradeData,$grade_id);
+        $grade = $this->GradeRepository->update($gradeData,$grade_id);
         $data = ["status" => "success", "data" =>new GradeResource($grade)];
         return response()->json($data, 200);
     }

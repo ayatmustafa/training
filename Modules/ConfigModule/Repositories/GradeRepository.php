@@ -13,20 +13,17 @@ use Modules\ConfigModule\Repositories\GradeRepositoryInterface;
 class GradeRepository implements GradeRepositoryInterface
 {
 
-   public function createGrade($request)
+   public function store($request)
    {
-      $grade = Grade::create($request->all());
-      return $grade;
+      return Grade::create($request->all());
    }
-   public function GetAllGrades()
+   public function index()
    {
-      $grades = Grade::all();
-      return $grades;
+      return Grade::all();
    }
-   public function getGrade($grade_id)
+   public function show($grade_id)
    {
-      $grade = Grade::where('id', $grade_id)->first();
-      return $grade;
+      return Grade::where('id', $grade_id)->first();
    }
    public function getGradeSection($grade_id)
    {
@@ -34,12 +31,12 @@ class GradeRepository implements GradeRepositoryInterface
       $section=$grade->section;
       return $section;
    }
-   public function AddGradeSection($grade_id,$request)
+   public function addGradeSection($grade_id,$request)
    {
      $AddSection= Grade::where('id',$grade_id)->update(['section_id'=>$request->section_id]);
       return $AddSection;
    }
-   public function updateGrade($gradeData,$grade_id)
+   public function update($gradeData,$grade_id)
    {
       $grade=Grade::find($grade_id);
       $grade->update($gradeData->all());

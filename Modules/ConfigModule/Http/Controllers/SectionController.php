@@ -17,27 +17,27 @@ class SectionController extends Controller
         $this->SectionRepository = $SectionRepository;
     }
 
-    public function getAllSections()
+    public function index()
     {
-        $getAllSections = $this->SectionRepository->getAllSections();
+        $getAllSections = $this->SectionRepository->index();
         $data = ["status" => "success", "data" => $getAllSections];
         return response()->json($data, 200);
     }
-    public function createSection(Request $sectionData)
+    public function store(Request $sectionData)
     {
-        $Section = $this->SectionRepository->createSection($sectionData);
+        $Section = $this->SectionRepository->store($sectionData);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
-    public function editSection($section_id)
+    public function show($section_id)
     {
-        $Section = $this->SectionRepository->editSection($section_id);
+        $Section = $this->SectionRepository->show($section_id);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
-    public function updateSection(Request $request, $section_id)
+    public function update(Request $request, $section_id)
     {
-        $Section = $this->SectionRepository->updateSection($request, $section_id);
+        $Section = $this->SectionRepository->update($request, $section_id);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
