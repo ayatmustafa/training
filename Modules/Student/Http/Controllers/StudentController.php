@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Student\Http\Requests\StudentRequest;
 use Modules\Student\Repositories\StudentRepositoryInterface;
-
+use Modules\Student\Transformers\StudentResource;
 
 class StudentController extends Controller
 {
@@ -16,28 +16,28 @@ class StudentController extends Controller
     {
         $this->StudentRepository = $StudentRepository;
     }
-    public function createStudent(StudentRequest $studentData)
+    public function create(StudentRequest $studentData)
     {
-        $student = $this->StudentRepository->createStudent($studentData);
-        $data = ["status" => "success", "data" => $student];
+        $student = $this->StudentRepository->create($studentData);
+        $data = ["status" => "success", "data" =>new StudentResource($student)];
         return response()->json($data, 200);
     }
 
-    public function getAllStudents()
+    public function index()
     {
-        $students = $this->StudentRepository->getAllStudents();
+        $students = $this->StudentRepository->index();
         $data = ["status" => "success", "data" => $students];
         return response()->json($data, 200);
     }
-    public function editStudent($student_id)
+    public function edit($student_id)
     {
-        $student = $this->StudentRepository->editStudent($student_id);
+        $student = $this->StudentRepository->edit($student_id);
         $data = ["status" => "success", "data" => $student];
         return response()->json($data, 200);
     }
-    public function UpdateStudent($student_id, Request $studentdata)
+    public function Update($student_id, Request $studentdata)
     {
-        $student = $this->StudentRepository->UpdateStudent($student_id, $studentdata);
+        $student = $this->StudentRepository->Update($student_id, $studentdata);
         $data = ["status" => "success", "data" => $student];
         return response()->json($data, 200);
     }
