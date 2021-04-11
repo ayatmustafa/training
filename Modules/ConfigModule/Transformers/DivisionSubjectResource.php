@@ -16,11 +16,11 @@ class DivisionSubjectResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
+            "id"        => $this->id,
             "divisions" => $this->divisions->translations->pluck('name'),
-            "grades" => Grade::whereIn('id',$this->grades->pluck('grade_id'))->pluck('name'),
-            "subjects" => $this->subjects->pluck('name'),
-            "user"     => $this->user->name
+            "grades"    => Grade::whereIn('id',$this->grades->pluck('grade_id'))->pluck('name'),
+            "subjects"  => $this->subjects->pluck('name'),
+            "user"      => $this->user->name
         ];
     }
 }

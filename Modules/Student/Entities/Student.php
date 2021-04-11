@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-use Modules\ConfigModule\Entities\Classes;
+use Modules\ConfigModule\Entities\AcademicClass;
 
 class Student extends Model implements TranslatableContract
 {
@@ -41,6 +41,6 @@ class Student extends Model implements TranslatableContract
        return $this->belongsTo('Modules\ConfigModule\Entities\section');
    }
    public function class() {
-       return $this->belongsTo(Classes::class);
+       return $this->belongsTo(AcademicClass::class);
    }
 }

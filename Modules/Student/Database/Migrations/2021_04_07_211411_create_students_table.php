@@ -41,7 +41,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('no action')->onUpdate('no action');
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('class_id')->constrained();
+            $table->foreignId('academic_class_id')->constrained();
             $table->timestamps();
         });
         Schema::create('students_translations', function (Blueprint $table) {

@@ -14,6 +14,7 @@ class DivisionSubjectRequest extends FormRequest
      */
     public function rules()
     {
+        // enhancement remove the duplicated key subject_id ang group all rules under one key
         return [
             'subject_id'  => 'unique:division_subjects,division_id',
             'subject_id'  => ['required','unique:division_subjects,division_id','exists:subjects,id'],

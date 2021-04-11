@@ -3,6 +3,8 @@ namespace Modules\ConfigModule\Repositories;
 
 interface GradeRepositoryInterface
 {
+    // rename every thing like in ClassesRepositoryInterface
+
     public function createGrade($request);
     public function GetAllGrades();
     public function getGrade($grade_id);

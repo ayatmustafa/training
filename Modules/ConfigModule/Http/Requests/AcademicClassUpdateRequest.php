@@ -5,7 +5,7 @@ namespace Modules\ConfigModule\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClassesUpdateRequest extends FormRequest
+class AcademicClassUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,7 +17,8 @@ class ClassesUpdateRequest extends FormRequest
         return [
             'division_id' => 'required|exists:divisions,id',
             'grade_id'    => 'required|exists:grades,id',
-            'name'        => ['string','required',Rule::unique('classes', 'name')->ignore($this->grad_id, 'grade_id')],
+            // enhancement $this->grad_id  grad_id is wrong
+            'name'        => ['string','required',Rule::unique('academic_classes', 'name')->ignore($this->grad_id, 'grade_id')],
             'user_id'     => 'exists:users,id',
         ];
     }

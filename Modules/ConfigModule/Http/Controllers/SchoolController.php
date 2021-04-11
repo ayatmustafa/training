@@ -5,6 +5,7 @@ namespace Modules\ConfigModule\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Modules\ConfigModule\Entities\School;
 use Modules\ConfigModule\Http\Requests\SchoolRequest;
 use Modules\ConfigModule\Http\Requests\UpdateSchoolRequest;
@@ -25,22 +26,13 @@ class SchoolController extends Controller
     public function index()
     {
         $response = $this->schoolRepo->index();
+        // enhancement remove the commented code
         return response()->json([
             'status' => 'success',
-            // 'data'   => $response,
+            // 'data'   => $response
             'data'   => SchoolResource::collection($response)
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('config::create');
-    }
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -48,10 +40,11 @@ class SchoolController extends Controller
      */
     public function store(SchoolRequest $request)
     {
-        $school = $this->schoolRepo->store($request);
+        $data = array_merge($request->all(), ['user_id'=> Auth::user()->id]);
+        $storedSchool = $this->schoolRepo->store($data);
         return response()->json([
             'status' => 'success',
-            'data'   => new SchoolResource($school)
+            'data'   => new SchoolResource($storedSchool)
         ]);
     } // end store method
 
@@ -60,39 +53,12 @@ class SchoolController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show()
+    public function show($id)
     {
-        $school =  $this->schoolRepo->show();
+        $getSchools =  $this->schoolRepo->show($id);
         return response()->json([
             'status' => 'success',
-            'data'   => SchoolResource::collection($school)
-        ]);
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function getSchool(School $school)
-    {
-        $school =  $this->schoolRepo->getSchool($school);
-        return response()->json([
-            'status' => 'success',
-            'data'   => new SchoolResource($school)
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit(School $school)
-    {
-        return response()->json([
-            'status' => 'success',
-            'data'   => new SchoolResource($school)
+            'data'   => new SchoolResource($getSchools)
         ]);
     }
 
@@ -104,10 +70,11 @@ class SchoolController extends Controller
      */
     public function update(UpdateSchoolRequest $request,School $school)
     {
-        $school =  $this->schoolRepo->update($request, $school);
+        return $request->all();
+        $updatedSchool =  $this->schoolRepo->update($request, $school);
         return response()->json([
             'status' => 'success',
-            'data'   => $school
+            'data'   => $updatedSchool
         ]);
     }
 
@@ -118,11 +85,10 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        
-        $school =  $this->schoolRepo->destroy($school);
+        $deletedSchool =  $this->schoolRepo->destroy($school);
         return response()->json([
             'status' => 'success',
-            'data'   => $school
+            'data'   => $deletedSchool
         ]);
     }
 }

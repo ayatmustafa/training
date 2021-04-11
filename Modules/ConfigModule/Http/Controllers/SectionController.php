@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+// enhancement rename all vars and functions like in ClassesController
 class SectionController extends Controller
 {
     protected  $SectionRepository;
@@ -47,7 +48,7 @@ class SectionController extends Controller
         return response()->json($data, 200);
     }
     public function changeStatus(Request $status)
-    { 
+    {
         $Section = $this->SectionRepository->changeStatus($status);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);

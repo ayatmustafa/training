@@ -7,6 +7,7 @@ use Modules\ConfigModule\Entities\Division;
 use Modules\ConfigModule\Entities\Section;
 use Modules\ConfigModule\Repositories\SectionRepositoryInterface;
 
+// the same comment as in the other repos 
 class SectionRepository implements SectionRepositoryInterface
 {
    public function getAllSections()

@@ -10,7 +10,7 @@ use Modules\OnlineClasses\Http\Requests\OnlineClassUpdateRequest;
 use Modules\OnlineClasses\Repositories\OnlineClassRepositoryInterface;
 use Modules\OnlineClasses\Transformers\OnlineClassResource;
 
-class OnlineClassController extends Controller
+class OnlineClassesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -86,11 +86,10 @@ class OnlineClassController extends Controller
      */
     public function update(OnlineClassUpdateRequest $request, $id)
     {
-        $updateOnlineClass = $this->onlineClass->update($request, $id);
+        $updatedOnlineClass = $this->onlineClass->update($request, $id);
         return response()->json([
             'status' => 'success',
-            // 'data'   => $updateOnlineClass
-            'data'   => new OnlineClassResource($updateOnlineClass)
+            'data'   => new OnlineClassResource($updatedOnlineClass)
             
         ]);
     }
@@ -102,10 +101,10 @@ class OnlineClassController extends Controller
      */
     public function destroy($id)
     {
-        $deleteOnlineClass = $this->onlineClass->destroy($id);
+        $deletedOnlineClass = $this->onlineClass->destroy($id);
         return response()->json([
             'status' => 'success',
-            'message'   => $deleteOnlineClass
+            'message'   => $deletedOnlineClass
         ]);
     }
 }

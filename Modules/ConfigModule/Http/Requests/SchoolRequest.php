@@ -14,12 +14,12 @@ class SchoolRequest extends FormRequest
     public function rules()
     {
         return [
-                "short_name"  => 'required|unique:schools_translations,short_name',
-                "long_name"   => "required|string|max:50|unique:schools_translations,long_name",
-                "branch_name" => "required|string|max:50|unique:schools_translations,branch_name",
-                'lat'            => "required|max:50",
-                'lng'            => "required|max:50",
-                "contacts"       => "required|array"
+            "short_name"  => 'required|unique:schools_translations,short_name',
+            "long_name"   => "required|string|max:50|unique:schools_translations,long_name",
+            "branch_name" => "required|string|max:50|unique:schools_translations,branch_name",
+            'lat'            => "required|max:50",
+            'lng'            => "required|max:50",
+            "contacts"       => "required|array"
         ];
     }
 
