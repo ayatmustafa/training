@@ -38,7 +38,7 @@ class OnlineClassRepository implements OnlineClassRepositoryInterface
         $path = 'users/me/meetings';
         $response = $this->zoomPost($path, [
             'type' => self::MEETING_TYPE_SCHEDULE,
-            'class_start_time' => $this->toZoomTimeFormat($request['class_start_time']),
+            'class_start_time' => $this->toZoomTimeFormat($request['date']."".$request['class_start_time']),
             'duration' => 40,
             'settings' => [
                 'host_video' => false,

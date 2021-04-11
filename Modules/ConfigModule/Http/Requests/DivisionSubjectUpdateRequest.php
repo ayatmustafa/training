@@ -13,6 +13,7 @@ class DivisionSubjectUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        // enhancement remove the subject_id duplication and make all roles on one place 
         return [
             'subject_id'  => 'unique:division_subjects,division_id',
             'subject_id'  => ['required','unique:division_subjects,division_id'],

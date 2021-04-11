@@ -16,7 +16,7 @@ class CreateClassTeachersTable extends Migration
         Schema::create('class_teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('academic_class_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

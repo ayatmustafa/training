@@ -20,7 +20,8 @@ class School extends Model implements TranslatableContract
   public function user() {
       return $this->belongsTo(User::class, 'user_id');
   }
-  public function division()
+  // enhancement name should be plural (divisions)
+  public function divisions()
   {
     return $this->hasMany(Division::class);
   }

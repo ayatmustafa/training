@@ -23,7 +23,8 @@ class Division extends Model implements TranslatableContract
     {
         return $this->hasMany('Modules\ConfigModule\Entities\Grade');
     }
-    public function division_subject() {
+    // enhancement this not write function name
+    public function divisionSubjects() {
         return $this->hasMany(DivisionSubject::class);
     }
     public function students()

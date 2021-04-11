@@ -20,7 +20,7 @@ class CreateOnlineClassesTable extends Migration
             $table->time('class_end_time');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('subject_id')->nullable()->constrained();
-            $table->foreignId('class_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('academic_class_id')->nullable()->constrained()->cascadeOnDelete();
             $table->enum("status", ["active", "archived"])->default("active");
             $table->char('zoom_meeting_id')->nullable();
             $table->string('duration')->nullable();

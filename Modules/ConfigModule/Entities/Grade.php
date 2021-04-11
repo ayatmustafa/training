@@ -8,15 +8,18 @@ class Grade extends Model
 
     protected $fillable = ['name','division_id','section_id'];
     protected $table ='grades';
+    // enhancement by default it's true no need to do this.
     public $timestamps = true;
 
     public function section()
     {
         return $this->belongsTo('Modules\ConfigModule\Entities\Section');
     }
+    // enhancement wrong function name
+//    also  u can use Division::class to get the relative path
     public function Division()
     {
         return $this->belongsTo('Modules\ConfigModule\Entities\Division');
     }
-    
+
 }

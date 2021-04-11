@@ -9,6 +9,7 @@ use Modules\ConfigModule\Entities\School;
 use Modules\ConfigModule\Http\Requests\GradeRequest;
 use Modules\ConfigModule\Repositories\GradeRepositoryInterface;
 
+// rename every thing like in ClassesRepository and dont use un necessary variables like $grade could return the result direct return Grade::create($request->all())
 class GradeRepository implements GradeRepositoryInterface
 {
 

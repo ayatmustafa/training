@@ -18,7 +18,7 @@ class DivisionSubject extends Model
     {
         return $this->hasMany(GradeSubject::class, 'division_subject_id');
     }
-    public function divisions() {
+    public function division() {
         return $this->belongsTo(Division::class, 'division_id');
     }
     public function user() {

@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Modules\ConfigModule\Repositories;
-use Illuminate\Support\Facades\Auth;
-use League\CommonMark\Util\ConfigurationInterface;
 use Modules\ConfigModule\Repositories\SchoolRepositoryInterface;
-
 use Modules\ConfigModule\Entities\School;
+
 class SchoolRepository implements SchoolRepositoryInterface
 {
+    // not right way to get translation please ask ayat for help
     private function getLocales($request) {
         $data = [];
         $lang = config('translatable.locales');
@@ -23,26 +21,17 @@ class SchoolRepository implements SchoolRepositoryInterface
     public function index() {
         return School::all();
     }
-    public function show() {
-        return School::with('user')->get();
+    public function show($id) {
+        return School::find($id);
     }
-    public function getSchool($school) {
-        return $school;
-    }
-    public function store($request) {
-        $data=$request->all();
-
-        $user = Auth::user()->id;
-        $data = array_merge($this->getLocales($request), ['user_id'=> $user]);
+    public function store($data) {
+        // this logic should be in service or controller this function should be return $school = School::create($data); and $data should be passed to this function
         $school = School::create($data);
         return $school;
     }
-    public function edit($school) {
-        return $school;
-    }
     public function update($request, $school) {
-  
-        return $school->update($request->all());
+        $school->update($request->all());
+        return  $school;
     }
     public function destroy($school) {
         return $school->delete();

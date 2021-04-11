@@ -16,29 +16,20 @@ class DivisionSubjectController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    protected $divisionSubject;
-    public function __construct(DivisionSubjectRepositoryInterface $divisionSubject)
+    // enhancement wrong name should be divisionSubjectRepo
+    protected $divisionSubjectRepo;
+    public function __construct(DivisionSubjectRepositoryInterface $divisionSubjectRepo)
     {
-        $this->divisionSubject = $divisionSubject;
+        $this->divisionSubjectRepo = $divisionSubjectRepo;
     }
     public function index()
     {
-        $getDivisionSubjects = $this->divisionSubject->index();
+        $getDivisionSubjects = $this->divisionSubjectRepo->index();
         return response()->json([
             "status" => "success",
             "data"   =>  DivisionSubjectResource::collection($getDivisionSubjects)
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('configmodule::create');
-    }
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -46,10 +37,10 @@ class DivisionSubjectController extends Controller
      */
     public function store(DivisionSubjectRequest $request)
     {
-        $storeDivisionSubject = $this->divisionSubject->store($request);
+        $storedDivisionSubject = $this->divisionSubjectRepo->store($request);
         return response()->json([
             "status" => "success",
-            "data"   =>  new DivisionSubjectResource($storeDivisionSubject)
+            "data"   =>  new DivisionSubjectResource($storedDivisionSubject)
         ]);
     }
 
@@ -60,23 +51,12 @@ class DivisionSubjectController extends Controller
      */
     public function show($id)
     {
-        $showDivisionSubject = $this->divisionSubject->show($id);
+        $showDivisionSubject = $this->divisionSubjectRepo->show($id);
         return response()->json([
             "status" => "status",
             "data"   =>   $showDivisionSubject !== null ? new DivisionSubjectResource($showDivisionSubject) : $showDivisionSubject
         ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('configmodule::edit');
-    }
-
     /**
      * Update the specified resource in storage.
      * @param Request $request
@@ -85,10 +65,10 @@ class DivisionSubjectController extends Controller
      */
     public function update(DivisionSubjectUpdateRequest $request, $id)
     {
-        $updateDivisionSubject = $this->divisionSubject->update($request, $id);
+        $updatedDivisionSubject = $this->divisionSubjectRepo->update($request, $id);
         return response()->json([
             "status" => "status",
-            "data"   => $updateDivisionSubject !== null ? new DivisionSubjectResource($updateDivisionSubject) : $updateDivisionSubject
+            "data"   => $updatedDivisionSubject !== null ? new DivisionSubjectResource($updatedDivisionSubject) : $updatedDivisionSubject
         ]);
     }
 
@@ -99,10 +79,10 @@ class DivisionSubjectController extends Controller
      */
     public function destroy($id)
     {
-        $deleteDivisionSubject = $this->divisionSubject->destroy($id);
+        $deletedDivisionSubject = $this->divisionSubjectRepo->destroy($id);
         return response()->json([
             "status" => "status",
-            "message"   => $deleteDivisionSubject
+            "message"   => $deletedDivisionSubject
         ]);
     }
 }

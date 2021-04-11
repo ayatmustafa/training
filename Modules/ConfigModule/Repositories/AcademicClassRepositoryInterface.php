@@ -2,7 +2,7 @@
 namespace Modules\ConfigModule\Repositories;
 
 
-interface ClassesRepositoryInterface {
+interface AcademicClassRepositoryInterface {
     public function index();
     public function show($id);
     public function store($request);

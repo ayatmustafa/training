@@ -4,7 +4,7 @@ namespace Modules\ConfigModule\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClassesRequest extends FormRequest
+class AcademicClassRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

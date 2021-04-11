@@ -66,14 +66,14 @@ public function toZoomTimeFormat(string $dateTime)
     }
 }
 
-    public function toUnixTimeStamp(string $dateTime, string $timezone)
-    {
-        try {
-            $date = new \DateTime($dateTime, new \DateTimeZone($timezone));
-            return $date->getTimestamp();
-        } catch (\Exception $e) {
-            Log::error('ZoomJWT->toUnixTimeStamp : ' . $e->getMessage());
-            return '';
-        }
+public function toUnixTimeStamp(string $dateTime, string $timezone)
+{
+    try {
+        $date = new \DateTime($dateTime, new \DateTimeZone($timezone));
+        return $date->getTimestamp();
+    } catch (\Exception $e) {
+        Log::error('ZoomJWT->toUnixTimeStamp : ' . $e->getMessage());
+        return '';
     }
+}
 }

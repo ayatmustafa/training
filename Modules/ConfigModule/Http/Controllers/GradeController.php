@@ -12,6 +12,8 @@ use Modules\ConfigModule\Transformers\GradeResource;
 
 class GradeController extends Controller
 {
+    // enhancement rename all variables and functions names have a look on ClassesController
+
     protected  $GradeRepository;
     public function __construct(GradeRepositoryInterface $GradeRepository)
     {

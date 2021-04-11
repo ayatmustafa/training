@@ -18,6 +18,7 @@ class Section extends Model implements TranslatableContract
     {
         return $this->belongsTo('Modules\ConfigModule\Entities\Division','division_id');
     }
+    //enhancement it should be grades()
     public function Grade()
     {
         return $this->hasMany('Modules\ConfigModule\Entities\Grade');

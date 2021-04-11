@@ -4,8 +4,8 @@ namespace Modules\ConfigModule\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Modules\ConfigModule\Repositories\ClassesRepositoryInterface;
-use Modules\ConfigModule\Repositories\ClassesRepository;
+use Modules\ConfigModule\Repositories\AcademicClassRepositoryInterface;
+use Modules\ConfigModule\Repositories\AcademicClassRepository;
 use Modules\ConfigModule\Repositories\DivisionSubjectRepository;
 use Modules\ConfigModule\Repositories\DivisionSubjectRepositoryInterface;
 
@@ -45,7 +45,7 @@ class ConfigModuleServiceProvider extends ServiceProvider
         $this->app->bind('Modules\ConfigModule\Repositories\SchoolRepositoryInterface','Modules\ConfigModule\Repositories\SchoolRepository');
         $this->app->bind('Modules\ConfigModule\Repositories\DivisionRepositoryInterface','Modules\ConfigModule\Repositories\DivisionRepository');
         $this->app->bind('Modules\ConfigModule\Repositories\SectionRepositoryInterface','Modules\ConfigModule\Repositories\SectionRepository');
-        $this->app->bind(ClassesRepositoryInterface::class, ClassesRepository::class);
+        $this->app->bind(AcademicClassRepositoryInterface::class, AcademicClassRepository::class);
         $this->app->bind(DivisionSubjectRepositoryInterface::class, DivisionSubjectRepository::class);
         $this->app->bind('Modules\ConfigModule\Repositories\GradeRepositoryInterface','Modules\ConfigModule\Repositories\GradeRepository');
 

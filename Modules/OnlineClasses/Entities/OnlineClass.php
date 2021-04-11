@@ -4,7 +4,7 @@ namespace Modules\OnlineClasses\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Modules\ConfigModule\Entities\Classes;
+use Modules\ConfigModule\Entities\AcademicClass;
 
 class OnlineClass extends Model
 {
@@ -14,7 +14,7 @@ class OnlineClass extends Model
         "class_start_time",
         "class_end_time",
         "user_id",  
-        "class_id",
+        "academic_class_id",
         "subject_id", 
         "status", 
         "zoom_meeting_id",
@@ -32,6 +32,6 @@ class OnlineClass extends Model
         return $this->hasOne(ZoomOnlineClass::class);
     }
     public function class() {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(AcademicClass::class);
     }
 }
