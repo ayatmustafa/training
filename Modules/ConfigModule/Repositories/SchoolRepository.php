@@ -6,7 +6,6 @@ use Modules\ConfigModule\Entities\School;
 
 class SchoolRepository implements SchoolRepositoryInterface
 {
-    // not right way to get translation please ask ayat for help
     private function getLocales($request) {
         $data = [];
         $lang = config('translatable.locales');
@@ -29,11 +28,15 @@ class SchoolRepository implements SchoolRepositoryInterface
         $school = School::create($data);
         return $school;
     }
-    public function update($request, $school) {
-        $school->update($request->all());
-        return  $school;
+    public function update($data, $id) {
+        $isUpdated = School::find($id);
+        if($isUpdated !== null)
+            $isUpdated->update($data->all());
+        return $isUpdated;
     }
-    public function destroy($school) {
-        return $school->delete();
+    public function destroy($id) {
+        $isDeleted = School::where('id', $id)->first();
+        if($isDeleted !== null)
+          return $isDeleted->delete();   
     }
 }

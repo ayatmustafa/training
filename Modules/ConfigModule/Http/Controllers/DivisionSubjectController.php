@@ -5,6 +5,7 @@ namespace Modules\ConfigModule\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Modules\ConfigModule\Http\Requests\DivisionSubjectRequest;
 use Modules\ConfigModule\Http\Requests\DivisionSubjectUpdateRequest;
 use Modules\ConfigModule\Repositories\DivisionSubjectRepositoryInterface;
@@ -27,7 +28,8 @@ class DivisionSubjectController extends Controller
         $getDivisionSubjects = $this->divisionSubjectRepo->index();
         return response()->json([
             "status" => "success",
-            "data"   =>  DivisionSubjectResource::collection($getDivisionSubjects)
+            'data'   => $getDivisionSubjects
+            // "data"   =>  DivisionSubjectResource::collection($getDivisionSubjects)
         ]);
     }
     /**
@@ -37,9 +39,13 @@ class DivisionSubjectController extends Controller
      */
     public function store(DivisionSubjectRequest $request)
     {
-        $storedDivisionSubject = $this->divisionSubjectRepo->store($request);
+        $userId = Auth::user()->id;
+        $data = array_merge($request->all(),["user_id" => $userId]);
+        $storedDivisionSubject = $this->divisionSubjectRepo->store($data);
         return response()->json([
             "status" => "success",
+            // "data"   =>  $storedDivisionSubject
+
             "data"   =>  new DivisionSubjectResource($storedDivisionSubject)
         ]);
     }

@@ -16,10 +16,13 @@ class Grade extends Model
         return $this->belongsTo('Modules\ConfigModule\Entities\Section');
     }
     // enhancement wrong function name
-//    also  u can use Division::class to get the relative path
+    // also  u can use Division::class to get the relative path
     public function Division()
     {
         return $this->belongsTo('Modules\ConfigModule\Entities\Division');
+    }
+    public function gradeSubjects() {
+        return $this->hasMany(GradeSubject::class);
     }
 
 }
