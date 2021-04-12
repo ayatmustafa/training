@@ -16,7 +16,7 @@ class GradeResource extends JsonResource
     {
      return [
             'id'=>$this->id,
-            'Name of Grade'=>$this->name,
+            'name'=>$this->name,
             ];
     }
 }

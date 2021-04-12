@@ -5,7 +5,7 @@ namespace Modules\ConfigModule\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-
+use Modules\Student\Entities\Student;
 
 class Division extends Model implements TranslatableContract
 {
@@ -15,13 +15,13 @@ class Division extends Model implements TranslatableContract
     public $translatedAttributes = ['name'];
     protected $hidden   =  ['created_at', 'updated_at'];
 
-    public function Section()
+    public function sections()
     {
-        return $this->hasMany('Modules\ConfigModule\Entities\Section');
+        return $this->hasMany(Section::class);
     }
-    public function Grade()
+    public function grades()
     {
-        return $this->hasMany('Modules\ConfigModule\Entities\Grade');
+        return $this->hasMany(Grade::class);
     }
     // enhancement this not write function name
     public function divisionSubjects() {
@@ -29,6 +29,10 @@ class Division extends Model implements TranslatableContract
     }
     public function students()
     {
-        return $this->hasMany('Modules\Student\Entities\Student');
+        return $this->hasMany(Student::class);
+    }
+    public function school()
+    {
+        return $this->belongsTo(School::class,'school_id');
     }
 }
