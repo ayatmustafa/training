@@ -29,7 +29,7 @@ class SectionRepository implements SectionRepositoryInterface
     }
     public function getSectionByDivision($division_id)
     {
-        return Division::with('Section')->find($division_id);
+        return Section::where('division_id',$division_id)->get();
     }
     public function changeStatus($req)
     {

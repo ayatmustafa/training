@@ -6,6 +6,7 @@ use Modules\ConfigModule\Repositories\DivisionRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\ConfigModule\Http\Requests\DivisionRequest;
 
 class DivisionController extends Controller
 {
@@ -35,17 +36,17 @@ class DivisionController extends Controller
 
 
     // enhancement wrong name create()
-    public function create(Request $request)
+    public function store(DivisionRequest $request)
     {
-        $divisions = $this->DivisionRepository->createDivision($request);
+        $divisions = $this->DivisionRepository->store($request);
         $data = ["status" => "success", "data" => $divisions];
         return response()->json($data, 200);
     }
 
     // enhancement wrong name edit()
-    public function edit($division_id)
+    public function show($division_id)
     {
-        $divisions = $this->DivisionRepository->edit($division_id);
+        $divisions = $this->DivisionRepository->show($division_id);
         // enhancement no need to define variable data we can return this array in json(["status" => "success", "data" => $divisions])
         $data = ["status" => "success", "data" => $divisions];
         return response()->json($data, 200);

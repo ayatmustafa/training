@@ -12,7 +12,7 @@ class GradeSubject extends Model
     public function divisionSubject() {
         return $this->belongsTo(DivisionSubject::class, 'division_subject_id');
     }
-    public function grades()
+    public function grade()
     {
         return $this->belongsTo(Grade::class);
     }

@@ -26,7 +26,7 @@ class DivisionRepository implements DivisionRepositoryInterface
     }
 
    
-    public function create($request)
+    public function store($request)
      {
          // enhancement there should be no commented code
  
@@ -36,7 +36,7 @@ class DivisionRepository implements DivisionRepositoryInterface
         return $division;
 
     }
-    public function edit($division_id)
+    public function show($division_id)
     {
         return School::find($division_id);
     }

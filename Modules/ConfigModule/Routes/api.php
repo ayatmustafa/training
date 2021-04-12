@@ -59,8 +59,8 @@ Route::group(['prefix' => '/ConfigModule', 'middleware' => ['auth:api', 'role:SM
 |                               Grades CRUD APIs                   |
 |--------------------------------------------------------------------------*/
 
-    Route::apiResource('/Grades', 'GradeController');
-    Route::group(['prefix' => '/Grades'], function () {
+    Route::apiResource('/grades', 'GradeController');
+    Route::group(['prefix' => '/grades'], function () {
         Route::get('/getsection/{grade_id}', 'GradeController@getGradeSection');
         Route::post('/addsection/{grade_id}', 'GradeController@addGradeSection');
     });

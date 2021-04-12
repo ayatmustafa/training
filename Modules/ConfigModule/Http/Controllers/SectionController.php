@@ -7,6 +7,8 @@ use Modules\ConfigModule\Repositories\SectionRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\ConfigModule\Http\Requests\SectionRequest;
+use Modules\ConfigModule\Http\Requests\UpdateSectionRequest;
 
 // enhancement rename all vars and functions like in ClassesController
 class SectionController extends Controller
@@ -23,7 +25,7 @@ class SectionController extends Controller
         $data = ["status" => "success", "data" => $getAllSections];
         return response()->json($data, 200);
     }
-    public function store(Request $sectionData)
+    public function store(SectionRequest $sectionData)
     {
         $Section = $this->SectionRepository->store($sectionData);
         $data = ["status" => "success", "data" => $Section];
@@ -35,7 +37,7 @@ class SectionController extends Controller
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
-    public function update(Request $request, $section_id)
+    public function update(UpdateSectionRequest $request, $section_id)
     {
         $Section = $this->SectionRepository->update($request, $section_id);
         $data = ["status" => "success", "data" => $Section];

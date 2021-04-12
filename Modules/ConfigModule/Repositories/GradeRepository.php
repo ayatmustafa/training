@@ -27,7 +27,7 @@ class GradeRepository implements GradeRepositoryInterface
    }
    public function getGradeSection($grade_id)
    {
-      $grade=Grade::find($grade_id);
+      $grade=Grade::where('id',$grade_id)->first();
       $section=$grade->section;
       return $section;
    }
