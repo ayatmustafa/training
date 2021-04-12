@@ -3,9 +3,11 @@
 
 namespace Modules\ConfigModule\Repositories;
 
+use Modules\ConfigModule\Entities\Configuration;
 use Modules\ConfigModule\Entities\Division;
 use Modules\ConfigModule\Entities\Section;
 use Modules\ConfigModule\Repositories\SectionRepositoryInterface;
+use Symfony\Component\Console\Input\Input;
 
 // the same comment as in the other repos 
 class SectionRepository implements SectionRepositoryInterface
@@ -23,8 +25,16 @@ class SectionRepository implements SectionRepositoryInterface
         return Section::where('id', $section_id)->first();
     }
     public function update($request, $section_id)
-    {
-        $section = Section::where('id', $section_id)->update($request->all());
+    {   
+        $configs=Configuration::where('key','locales')->first();
+        $section = Section::where('id', $section_id)->first();
+        // $data=$request->all();
+           foreach( $configs->value as $value){
+            //  $data='name:'.$value;
+             $data['name:'.$value]=$request->name;
+             $section->update(array_merge($request->all(),['name'=>$data]));
+
+           }
         return $section;
     }
     public function getSectionByDivision($division_id)
