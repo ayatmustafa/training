@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD','cors', 'json']], function() {
         // replace all five crud routes with resource ask ayat for help
-    Route::apiResource('/Schools', 'SchoolController');
+    Route::resource('/Schools', 'SchoolController');
 /*----------------------------------------------------------------------------
 |                               AcademicClasses CRUD APIs                    |
 |--------------------------------------------------------------------------*/
@@ -31,8 +31,7 @@ Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD
 /*----------------------------------------------------------------------------
 |                               DivisionSubjects CRUD APIs                   |
 |--------------------------------------------------------------------------*/
-    Route::apiResource('/DivisionSubject', 'DivisionSubjectController');
-    
+    Route::resource('/DivisionSubject', 'DivisionSubjectController');
     // wrong naming for prefix should be /divisions and you should use resource and the default resource function names ask ayat to help
     Route::group(['prefix' => '/division'], function () {
         Route::get('/getdivisions','DivisionController@getdivisions');

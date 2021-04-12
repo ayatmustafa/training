@@ -10,11 +10,7 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => [
-        'en',
-        'ar',
-        'fr',
-    ],
+    'locales' => config('defines.locales'),
 
     /*
     |--------------------------------------------------------------------------
@@ -139,7 +135,7 @@ return [
      *
      */
     'rule_factory' => [
-        'format' => \Astrotomic\Translatable\Validation\RuleFactory::FORMAT_ARRAY,
+        'format' => \Astrotomic\Translatable\Validation\RuleFactory::FORMAT_KEY,
         'prefix' => '%',
         'suffix' => '%',
     ],

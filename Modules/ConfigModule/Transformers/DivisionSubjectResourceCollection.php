@@ -2,13 +2,12 @@
 
 namespace Modules\ConfigModule\Transformers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\ConfigModule\Entities\Grade;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class DivisionSubjectResource extends JsonResource
+class DivisionSubjectResourceCollection extends ResourceCollection
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request
      * @return array
