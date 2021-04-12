@@ -3,7 +3,6 @@
 namespace Modules\ConfigModule\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\ConfigModule\Entities\Grade;
 
 class DivisionSubjectResource extends JsonResource
 {
@@ -18,7 +17,7 @@ class DivisionSubjectResource extends JsonResource
         return [
             "id"        => $this->id,
             "divisions" => $this->division->logo,
-            "grades"    => $this->gradeSubjects->has('grade'),
+            "grades"    => $this->gradeSubjects->first()->grade->pluck('name'),
             "subjects"  => $this->subjects->pluck('name'),
             "user"      => $this->user->name,
         ];

@@ -28,8 +28,7 @@ class DivisionSubjectController extends Controller
         $getDivisionSubjects = $this->divisionSubjectRepo->index();
         return response()->json([
             "status" => "success",
-            'data'   => $getDivisionSubjects
-            // "data"   =>  DivisionSubjectResource::collection($getDivisionSubjects)
+            "data"   =>  DivisionSubjectResource::collection($getDivisionSubjects)
         ]);
     }
     /**
@@ -44,8 +43,6 @@ class DivisionSubjectController extends Controller
         $storedDivisionSubject = $this->divisionSubjectRepo->store($data);
         return response()->json([
             "status" => "success",
-            // "data"   =>  $storedDivisionSubject
-
             "data"   =>  new DivisionSubjectResource($storedDivisionSubject)
         ]);
     }
@@ -74,7 +71,8 @@ class DivisionSubjectController extends Controller
         $updatedDivisionSubject = $this->divisionSubjectRepo->update($request, $id);
         return response()->json([
             "status" => "status",
-            "data"   => $updatedDivisionSubject !== null ? new DivisionSubjectResource($updatedDivisionSubject) : $updatedDivisionSubject
+            "data"   => $updatedDivisionSubject
+            // "data"   => $updatedDivisionSubject !== null ? new DivisionSubjectResource($updatedDivisionSubject) : $updatedDivisionSubject
         ]);
     }
 

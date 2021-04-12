@@ -15,10 +15,8 @@ class DivisionSubjectUpdateRequest extends FormRequest
     {
         // enhancement remove the subject_id duplication and make all roles on one place 
         return [
-            'subject_id'  => 'unique:division_subjects,division_id',
-            'subject_id'  => ['required','unique:division_subjects,division_id'],
-            'division_id' => 'required|exists:divisions,id',
-            'user_id'     => 'required|exists:users,id',
+            'subject_id'  => 'unique:division_subjects,division_id,'.$this->subject_id.',division_id',
+            'division_id' => 'exists:divisions,id',
         ];
     }
 

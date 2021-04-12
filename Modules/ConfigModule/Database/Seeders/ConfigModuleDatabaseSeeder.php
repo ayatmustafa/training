@@ -17,8 +17,8 @@ class ConfigModuleDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //  $this->call(SeedSchoolsSeederTableSeeder::class);
-        // $this->call(SeedDivisionSeederTableSeeder::class);
+        $this->call(SeedSchoolsSeederTableSeeder::class);
+        $this->call(SeedDivisionSeederTableSeeder::class);
         $this->call(SeedSectionsSeederTableSeeder::class);
     }
 }

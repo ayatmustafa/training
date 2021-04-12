@@ -13,9 +13,7 @@ class DivisionSubjectRepository implements DivisionSubjectRepositoryInterface
     }
 
     public function index() {
-        return  $this->divisionSubject->with('gradeSubjects.grade', function($q) {
-            $q->select('name')->get();
-        })->get();
+        return  $this->divisionSubject->get();
     }
     public function show($id) {
             return $this->divisionSubject->find($id);
@@ -32,12 +30,14 @@ class DivisionSubjectRepository implements DivisionSubjectRepositoryInterface
     public function update($data,$id) {
         // warning don't ever forget to remove the debugging code here the function will only return the divisionSubject
         // you could also search about updated many in laravel instead of looping
+        //  dd($data->all());
 
        $divisionSubject = $this->divisionSubject->find($id);
         if($divisionSubject !== null){
             $divisionSubject->update($data->all());
-            $divisionSubject->gradeSubjects()->updateMany($data["gradeIds"]);
-            return$divisionSubject;
+                $divisionSubject->gradeSubjects()->upsert($data['gradeIds']);
+        
+            return $divisionSubject;
         }
         return "not exists";
     }
