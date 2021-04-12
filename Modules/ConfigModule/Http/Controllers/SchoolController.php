@@ -6,7 +6,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Modules\ConfigModule\Entities\School;
 use Modules\ConfigModule\Http\Requests\SchoolRequest;
 use Modules\ConfigModule\Http\Requests\UpdateSchoolRequest;
 use Modules\ConfigModule\Repositories\SchoolRepositoryInterface;
@@ -29,7 +28,6 @@ class SchoolController extends Controller
         // enhancement remove the commented code
         return response()->json([
             'status' => 'success',
-            // 'data'   => $response
             'data'   => SchoolResource::collection($response)
         ]);
     }
@@ -40,7 +38,8 @@ class SchoolController extends Controller
      */
     public function store(SchoolRequest $request)
     {
-        $data = array_merge($request->all(), ['user_id'=> Auth::user()->id]);
+        $userId = Auth::user()->id;
+        $data = array_merge($request->all(), ['user_id'=> $userId]);
         $storedSchool = $this->schoolRepo->store($data);
         return response()->json([
             'status' => 'success',
@@ -58,7 +57,7 @@ class SchoolController extends Controller
         $getSchools =  $this->schoolRepo->show($id);
         return response()->json([
             'status' => 'success',
-            'data'   => new SchoolResource($getSchools)
+            'data'   => $getSchools !== null ? new SchoolResource($getSchools) : $getSchools
         ]);
     }
 
@@ -68,13 +67,12 @@ class SchoolController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(UpdateSchoolRequest $request,School $school)
+    public function update(UpdateSchoolRequest $request, $id)
     {
-        return $request->all();
-        $updatedSchool =  $this->schoolRepo->update($request, $school);
+        $updatedSchool =  $this->schoolRepo->update($request, $id);
         return response()->json([
             'status' => 'success',
-            'data'   => $updatedSchool
+            'data'   => $updatedSchool !== null ? new SchoolResource($updatedSchool) : $updatedSchool
         ]);
     }
 
@@ -83,9 +81,9 @@ class SchoolController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy(School $school)
+    public function destroy($id)
     {
-        $deletedSchool =  $this->schoolRepo->destroy($school);
+        $deletedSchool =  $this->schoolRepo->destroy($id);  
         return response()->json([
             'status' => 'success',
             'data'   => $deletedSchool

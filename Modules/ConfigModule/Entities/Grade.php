@@ -21,5 +21,8 @@ class Grade extends Model
     {
         return $this->belongsTo(Division::class,'division_id');
     }
+    public function gradeSubjects() {
+        return $this->hasMany(GradeSubject::class);
+    }
 
 }

@@ -14,7 +14,7 @@ class SubjectSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+{
         Subject::firstOrCreate(["name" => "Arabic"]);
         Subject::firstOrCreate(["name" => "English"]);
         Subject::firstOrCreate(["name" => "French"]);
