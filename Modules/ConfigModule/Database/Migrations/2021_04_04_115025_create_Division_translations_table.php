@@ -18,7 +18,7 @@ class CreateDivisionTranslationsTable extends Migration
             $table->string('name');
             $table->string('locale')->index();
             $table->bigInteger('division_id')->unsigned();
-            $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade')->onUpdate('cascade');
           $table->timestamps();
         });
        

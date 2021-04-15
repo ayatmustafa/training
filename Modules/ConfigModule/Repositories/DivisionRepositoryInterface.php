@@ -3,9 +3,9 @@ namespace Modules\ConfigModule\Repositories;
 
 interface DivisionRepositoryInterface
 {
-    public function getdivisions();
-    public function DivisionByschoolID($school_id);
-    public function createDivision($request);
-    public function editDivisionData($division_id);
-    public function UpdateDivision($request,$Division_id);
+    public function index();
+    public function divisionBySchoolId($school_id);
+    public function store($request);
+    public function show($division_id);
+    public function Update($request,$Division_id);
 }

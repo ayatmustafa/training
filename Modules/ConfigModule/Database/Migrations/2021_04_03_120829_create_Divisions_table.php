@@ -13,11 +13,11 @@ class CreateDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Divisions', function (Blueprint $table) {
+        Schema::create('divisions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('logo');
             $table->bigInteger('school_id')->unsigned();
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('no action')->onUpdate('no action');;
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

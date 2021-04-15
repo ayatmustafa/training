@@ -10,7 +10,7 @@ class GradeSubject extends Model
     protected $hidden   = ['created_at', 'updated_at'];
     
     public function divisionSubject() {
-        return $this->belongsTo(DivisionSubject::class, 'division_subject_id');
+        return $this->belongsTo(DivisionSubject::class);
     }
     public function grade()
     {

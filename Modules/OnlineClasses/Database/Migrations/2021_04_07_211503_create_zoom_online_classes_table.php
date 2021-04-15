@@ -15,8 +15,8 @@ class CreateZoomOnlineClassesTable extends Migration
     {
         Schema::create('zoom_online_classes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('online_class_id')->constrained()->references('id')->on('online_classes')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('online_class_id')->constrained()->references('id')->on('online_classes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('status')->nullable();
             $table->timestamps();
         });

@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,48 +22,46 @@ use Illuminate\Support\Facades\Route;
 |                               SCHOOL CRUD APIs                            |
 |--------------------------------------------------------------------------*/
 
-Route::group(['prefix' => '/ConfigModule','middleware' => ['auth:api', 'role:SMD','cors', 'json']], function() {
-        // replace all five crud routes with resource ask ayat for help
-    Route::resource('/Schools', 'SchoolController');
-/*----------------------------------------------------------------------------
+Route::group(['prefix' => '/ConfigModule', 'middleware' => ['auth:api', 'role:SMD', 'cors', 'json']], function () {
+    // replace all five crud routes with resource ask ayat for help
+    Route::apiResource('/Schools', 'SchoolController');
+    /*----------------------------------------------------------------------------
 |                               AcademicClasses CRUD APIs                    |
 |--------------------------------------------------------------------------*/
     Route::apiResource('/AcademicClasses', 'AcademicClassController');
-/*----------------------------------------------------------------------------
+    /*----------------------------------------------------------------------------
 |                               DivisionSubjects CRUD APIs                   |
 |--------------------------------------------------------------------------*/
-    Route::resource('/DivisionSubject', 'DivisionSubjectController');
+    Route::apiResource('/DivisionSubject', 'DivisionSubjectController');
+
     // wrong naming for prefix should be /divisions and you should use resource and the default resource function names ask ayat to help
-    Route::group(['prefix' => '/division'], function () {
-        Route::get('/getdivisions','DivisionController@getdivisions');
-        Route::get('/DivisionByschoolID/{school_id}','DivisionController@DivisionByschoolID');
-        Route::post('/create-newdivision','DivisionController@createDivision');
-        Route::get('/editDivisionData/{division_id}','DivisionController@editDivisionData');
-        Route::post('/update-division/{division_id}','DivisionController@UpdateDivision');
-    });
+ /*----------------------------------------------------------------------------
+|                               Divisions CRUD APIs                   |
+|--------------------------------------------------------------------------*/
+    Route::apiResource('/divisions', 'DivisionController');
+    Route::get('/division-byid/{school_id}', 'DivisionController@divisionBySchoolId');
 
-    // Route::post('/creatediv','DivisionController@createDivision');
-    Route::post('/create','ConfigModuleController@create');
 
-    ##############section API#################
+   
 
-//    prefix should be plural like /sections
-    Route::group(['prefix' => '/section'], function () {
-        Route::get('/get-allSections','SectionController@getAllSections');
-        Route::post('/create-Section','SectionController@createSection');
-        Route::get('/edit/{id}','SectionController@editSection');
-        Route::get('/update/{id}','SectionController@updateSection');
+    /*----------------------------------------------------------------------------
+|                               Sections CRUD APIs                   |
+|--------------------------------------------------------------------------*/
+
+    //    prefix should be plural like /sections
+    Route::apiResource('/sections', 'SectionController');
+    Route::group(['prefix' => '/sections'], function () {
         Route::get('/get-Sections/indivision/{id}','SectionController@getSectionByDivision');
-        Route::post('/changeStatuss','SectionController@changeStatus');
+        Route::post('/changeStatuss', 'SectionController@changeStatus');
     });
-    Route::group(['prefix' => '/Grade'], function () {
 
-        Route::post('/create','GradeController@createGrade');
-        Route::get('/getall','GradeController@GetAllGrades');
-        Route::get('/get/{grade_id}','GradeController@getGrade');
-        Route::get('/getsection/{grade_id}','GradeController@getGradeSection');
-        Route::post('/addsection/{grade_id}','GradeController@AddGradeSection');
-        Route::post('/update/{grade_id}','GradeController@updateGrade');
+ /*----------------------------------------------------------------------------
+|                               Grades CRUD APIs                   |
+|--------------------------------------------------------------------------*/
 
+    Route::apiResource('/grades', 'GradeController');
+    Route::group(['prefix' => '/grades'], function () {
+        Route::get('/getsection/{grade_id}', 'GradeController@getGradeSection');
+        Route::post('/addsection/{grade_id}', 'GradeController@addGradeSection');
     });
 });

@@ -16,6 +16,9 @@ class GradeRequest extends FormRequest
         return [
 
             'name' => 'required|string|max:255',
+            'division_id' => 'required|exists:divisions,id',
+            'section_id' => 'required|exists:sections,id',
+
         ];
     }
 

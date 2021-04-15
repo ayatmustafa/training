@@ -16,8 +16,9 @@ class DivisionSubjectResource extends JsonResource
     {
         return [
             "id"        => $this->id,
-            "divisions" => $this->division->logo,
-            "grades"    => $this->gradeSubjects->first()->grade->pluck('name'),
+            'division_id' =>  $this->division->id,
+            "division" =>$this->division->translate(config('app.locale'))['name'] ?? $this->division->translations->first()->name,
+            "grades"    => $this->grades->pluck('name'),
             "subjects"  => $this->subjects->pluck('name'),
             "user"      => $this->user->name,
         ];

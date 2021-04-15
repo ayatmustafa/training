@@ -24,7 +24,7 @@ class DivisionSubjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'gradeIds.exists' => 'grade id does not valid'
+            'gradeIds.exists' => 'grade id does not valid',
         ];
     }
 

@@ -20,5 +20,8 @@ class ConfigModuleDatabaseSeeder extends Seeder
         $this->call(SeedSchoolsSeederTableSeeder::class);
         $this->call(SeedDivisionSeederTableSeeder::class);
         $this->call(SeedSectionsSeederTableSeeder::class);
+        $this->call(GradeSeederTableSeeder::class);
+        $this->call(ConfigurationSeederTableSeeder::class);
+        $this->call(SubjectSeeder::class);
     }
 }

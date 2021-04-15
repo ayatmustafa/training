@@ -24,7 +24,6 @@ class AcademicClassRepository implements AcademicClassRepositoryInterface
     public function store($data) {
         // enhancement this request data handling should be in service class or at least in the controller the repo function only is to interact with db
         //you should pass this $data ready from the right place to here
-        // $data =  $request->all();
         //this var should be $class
         $class = AcademicClass::create($data);
         return $class;
@@ -42,14 +41,12 @@ class AcademicClassRepository implements AcademicClassRepositoryInterface
         $isUpdated = AcademicClass::whereId($id)->first();
         if($isUpdated !== null){
             $isUpdated->update($request->all());
-            return $isUpdated;
+        return $isUpdated;
         }
-        return "not exists";
     }
     public function destroy($id) {
         $classes = $this->classes->find($id);
         if($classes !== null)
             return $classes->delete();
-        return "not exists";
     }
 }

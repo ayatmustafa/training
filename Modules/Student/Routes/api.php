@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => '/student', 'middleware' => ['auth:api', 'role:SMD', 'cors', 'json']], function () {
 
 
-    Route::get('/all', 'StudentController@getAllStudents');
+    Route::get('/all', 'StudentController@index');
     Route::get('/studrnt-division/{division_id}', 'StudentController@StudentsInDivision');
     Route::get('/studrnt-section/{section_id}', 'StudentController@StudentsInSection');
     Route::get('/studrnt-grade/{grade_id}', 'StudentController@StudentsInGrade');
@@ -29,7 +29,7 @@ Route::group(['prefix' => '/student', 'middleware' => ['auth:api', 'role:SMD', '
 });
 
 Route::group(['prefix' => '/student', 'middleware' => ['auth:api', 'role:Student', 'cors', 'json']], function () {
-    Route::get('/create', 'StudentController@createStudent');
-    Route::get('/edit/{student_id}', 'StudentController@editStudent');
-    Route::get('/update/{student_id}', 'StudentController@UpdateStudent');
+    Route::get('/create', 'StudentController@create');
+    Route::get('/edit/{student_id}', 'StudentController@edit');
+    Route::get('/update/{student_id}', 'StudentController@Update');
 });

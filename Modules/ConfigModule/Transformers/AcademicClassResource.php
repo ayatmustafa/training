@@ -21,7 +21,7 @@ class AcademicClassResource extends JsonResource
     $teachers = Teacher::whereIn('id',$this->TeacherClasses->pluck('teacher_id'))->pluck('user_id');
         return [
             'id'           => $this->id,
-            'section_name' => $this->division->Section()->first()->name,
+            'section_name' => $this->division->section()->first()->name,
             'division'     => $this->division->logo,
             'grade'        => $this->grade->name,
             'class_name'   => $this->name,

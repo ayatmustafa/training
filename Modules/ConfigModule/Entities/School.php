@@ -25,5 +25,6 @@ class School extends Model implements TranslatableContract
   {
     return $this->hasMany(Division::class);
   }
+  
 }
 

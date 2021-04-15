@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DivisionSubject extends Model
 {
-    // protected $table = 'division_subjects';
     protected $fillable = ['subject_id', 'division_id', 'user_id'];
     protected $hidden   =  ['created_at', 'updated_at'];
 
@@ -23,5 +22,9 @@ class DivisionSubject extends Model
     }
     public function user() {
         return $this->belongsTo(User::class);
+    }
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'division_id');
     }
 }

@@ -4,7 +4,7 @@ namespace Modules\ConfigModule\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DivisionSubjectUpdateRequest extends FormRequest
+class DivisionRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,10 +13,10 @@ class DivisionSubjectUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        // enhancement remove the subject_id duplication and make all roles on one place 
         return [
-            'subject_id'  => 'required|unique:grade_subjects,division_subject_id|exists:subjects,id',
-            'division_id' => 'required|exists:divisions,id',
+          
+            'name' => 'required|string|max:255',
+            'school_id'=>'required|exists:schools,id',
         ];
     }
 

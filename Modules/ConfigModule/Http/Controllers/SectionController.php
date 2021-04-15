@@ -7,6 +7,8 @@ use Modules\ConfigModule\Repositories\SectionRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\ConfigModule\Http\Requests\SectionRequest;
+use Modules\ConfigModule\Http\Requests\UpdateSectionRequest;
 
 // enhancement rename all vars and functions like in ClassesController
 class SectionController extends Controller
@@ -17,27 +19,27 @@ class SectionController extends Controller
         $this->SectionRepository = $SectionRepository;
     }
 
-    public function getAllSections()
+    public function index()
     {
-        $getAllSections = $this->SectionRepository->getAllSections();
+        $getAllSections = $this->SectionRepository->index();
         $data = ["status" => "success", "data" => $getAllSections];
         return response()->json($data, 200);
     }
-    public function createSection(Request $sectionData)
+    public function store(SectionRequest $sectionData)
     {
-        $Section = $this->SectionRepository->createSection($sectionData);
+        $Section = $this->SectionRepository->store($sectionData);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
-    public function editSection($section_id)
+    public function show($section_id)
     {
-        $Section = $this->SectionRepository->editSection($section_id);
+        $Section = $this->SectionRepository->show($section_id);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }
-    public function updateSection(Request $request, $section_id)
+    public function update(UpdateSectionRequest $request, $section_id)
     {
-        $Section = $this->SectionRepository->updateSection($request, $section_id);
+        $Section = $this->SectionRepository->update($request, $section_id);
         $data = ["status" => "success", "data" => $Section];
         return response()->json($data, 200);
     }

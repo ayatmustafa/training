@@ -18,9 +18,9 @@ class DivisionResource extends JsonResource
             'id'               => $this->id,
             'logo'             => $this->logo,
             // enhancement this is a wrong key name it should be school_id
-            'school'           => $this->school_id,
+            'school_id'           => $this->school_id,
             // enhancement this is a wrong key name it should be name only
-            'Name of Division' => $this->name,
+            'name' => $this->name,
 
         ];
     }

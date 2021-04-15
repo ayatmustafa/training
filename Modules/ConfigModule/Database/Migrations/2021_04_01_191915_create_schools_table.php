@@ -15,7 +15,7 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->string('logo')->nullable();
@@ -24,7 +24,7 @@ class CreateSchoolsTable extends Migration
         });
         Schema::create('schools_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('school_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('long_name');
             $table->string('short_name');
             $table->string('address');

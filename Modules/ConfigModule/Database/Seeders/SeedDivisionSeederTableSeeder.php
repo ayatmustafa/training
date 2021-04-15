@@ -20,23 +20,23 @@ class SeedDivisionSeederTableSeeder extends Seeder
     ]);
     Division::create([
         'school_id' => 2,
-        'logo'=>'ib',
+        'logo'=>'IB',
         'en' => [
             'name' => "IB"
         ]
     ]);
     Division::create([
         'school_id' => 1,
-        'logo'=>'amirican',
+        'logo'=>'American',
         'en' => [
-            'name' => "Amirican"
+            'name' => "American"
         ]
     ]);
     Division::create([
         'school_id' => 2,
-        'logo'=>'amirican',
+        'logo'=>'American',
         'en' => [
-            'name' => "Amirican"
+            'name' => "American"
         ]
     ]);
 }

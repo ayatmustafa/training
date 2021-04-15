@@ -15,8 +15,8 @@ class CreateGradeSubjectsTable extends Migration
     {
         Schema::create('grade_subjects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grade_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('division_subject_id')->constrained()->references('id')->on('division_subjects');
+            $table->foreignId('grade_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('division_subject_id')->constrained()->references('id')->on('division_subjects')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
