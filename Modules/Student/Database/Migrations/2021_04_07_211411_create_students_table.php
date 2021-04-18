@@ -32,13 +32,13 @@ class CreateStudentsTable extends Migration
             $table->string("mother_occupation")->nullable();
 
             $table->bigInteger('division_id')->unsigned();
-            $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade')->onUpdate('cascade');
           
             $table->bigInteger('grade_id')->unsigned();
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade')->onUpdate('cascade');
           
             $table->bigInteger('school_id')->unsigned();
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade')->onUpdate('cascade');
 
             $table->bigInteger('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('no action')->onUpdate('no action');
@@ -66,7 +66,7 @@ class CreateStudentsTable extends Migration
             $table->string("mother_nationality")->nullable();
             $table->string('locale')->index();
             $table->bigInteger('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

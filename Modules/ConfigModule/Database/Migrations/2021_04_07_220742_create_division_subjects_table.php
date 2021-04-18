@@ -15,9 +15,9 @@ class CreateDivisionSubjectsTable extends Migration
     {
         Schema::create('division_subjects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('division_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subject_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('division_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

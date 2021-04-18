@@ -2,27 +2,17 @@
 
 namespace Modules\ConfigModule\Entities;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Node\Expr\AssignOp\Div;
 
 class Grade extends Model
 {
 
-    protected $fillable = ['name','division_id','section_id'];
+    protected $fillable = ['name'];
     protected $table ='grades';
+    protected $hidden = ['created_at', 'updated_at'];
     // enhancement by default it's true no need to do this.
 
-    public function section()
-    {
-        return $this->belongsTo(Section::class,'section_id');
-    }
+
     // enhancement wrong function name
-//    also  u can use Division::class to get the relative path
-    public function division()
-    {
-        return $this->belongsTo(Division::class,'division_id');
-    }
-    public function gradeSubjects() {
-        return $this->hasMany(GradeSubject::class);
-    }
+    // also  u can use Division::class to get the relative path
 
 }

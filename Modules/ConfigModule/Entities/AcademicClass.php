@@ -18,25 +18,34 @@ class AcademicClass extends Model
         'user_id',
     ];
     protected $hidden = ['created_at', 'updated_at'];
-    public function grade() {
-        return $this->belongsTo(Grade::class);
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class, 'grade_id');
     }
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
-    public function division() {
-        return $this->belongsTo(Division::class);
+    public function division()
+    {
+        return $this->belongsTo(Division::class, 'division_id');
     }
-    public function students() {
-        return $this->hasMany(Student::class,'academic_class_id');
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'academic_class_id');
     }
     // enhancement name should be teacherClass camel case
-    public function teacherClass() {
-        return $this->hasMany(ClassTeacher::class,'academic_class_id');
+    public function teacherClass()
+    {
+        return $this->hasMany(ClassTeacher::class, 'academic_class_id');
     }
     public function agendas()
     {
-        return $this->belongsToMany(ِAgenda::class,'AgendaClasses','academic_class_id','coordinator_section_id');
-    }
 
+        return $this->belongsToMany(ِAgenda::class, 'AgendaClasses', 'academic_class_id', 'coordinator_section_id');
+    }
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'class_teachers', 'academic_class_id', 'teacher_id');
+    }
 }

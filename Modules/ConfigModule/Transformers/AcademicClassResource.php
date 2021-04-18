@@ -18,18 +18,16 @@ class AcademicClassResource extends JsonResource
      */
     public function toArray($request)
     {
-    $teachers = Teacher::whereIn('id',$this->TeacherClasses->pluck('teacher_id'))->pluck('user_id');
         return [
-            'id'           => $this->id,
-            'section_name' => $this->division->Section()->first()->name,
-            'division'     => $this->division->logo,
-            'grade'        => $this->grade->name,
-            'class_name'   => $this->name,
-            'name'         => $this->user->name,
+            'id'              => $this->id,
+            'division_name'   => $this->division->translate(config('app.locale'))['name'] ?? $this->division->translations->first()->name,
+            'grade'           => $this->grade->name,
+            'class_name'      => $this->name,
+            'class_principal' => $this->user->name,
             // get those data via relationship don't make queries in the resource
-            'teachers'     => User::whereIn('id', $teachers)->pluck('name'),
-            "subjects"     => Subject::whereIn('id', $this->division->divisionSubjects->pluck('subject_id'))->pluck('name'),
-            'students'     => User::whereIn('id', $this->students->pluck('user_id'))->pluck('name')
+            'teachers'        => $this->teachers->pluck('user.name'),
+            "subjects"        => $this->division->divisionSubjects->pluck('subject.name'),
+            'students'        => $this->students->pluck('user.name')
         ];
     }
 }

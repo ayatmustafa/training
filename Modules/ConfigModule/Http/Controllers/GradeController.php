@@ -34,7 +34,9 @@ class GradeController extends Controller
     public function show($grade_id)
     {
         $grade = $this->GradeRepository->show($grade_id);
-        $data = ["status" => "success", "data" => new GradeResource($grade)];
+        $data = ["status" => "success", "data" =>  $grade
+        // new GradeResource($grade)
+    ];
         return response()->json($data, 200);
     }
     public function getGradeSection($grade_id)
