@@ -19,7 +19,7 @@ class StudentSeederTableSeeder extends Seeder
         $user_id=User::where('email','ahmed.nabil65@gmail.com')->first();
 
         Student::create([
-            'gender' => 'male',
+            'gender' =>'male',
             'father_contact_mobile'=>'01156500000',
             'father_contact_telephone'=>'0233822686',
             'father_contact_email_official'=>'nabil.ali65@gmail.com',
@@ -37,11 +37,10 @@ class StudentSeederTableSeeder extends Seeder
             'code'=>34,
             'section_id'=>2,
             'user_id'=>$user_id->id,
-
+            'academic_class_id'=>1,
             'en' => [
-                'first_name' => 'Ahmed',
+                'first_name' =>'Ahmed',
                 'middle_name'=>'Nabil',
-                'gender'=>'male',
                 'religion'=>'muslim',
                 'nationality'=>'egyption',
                 'father_first_name'=>'Nabil',
@@ -62,7 +61,7 @@ class StudentSeederTableSeeder extends Seeder
         $user_id=User::where('email','omar.nabil65@gmail.com')->first();
 
         Student::create([
-            'gender' => 'male',
+            'gender' =>'male',
             'father_contact_mobile'=>'01156500000',
             'father_contact_telephone'=>'0233822686',
             'father_contact_email_official'=>'nabil.ali65@gmail.com',
@@ -80,11 +79,11 @@ class StudentSeederTableSeeder extends Seeder
             'code'=>35,
             'section_id'=>1,
             'user_id'=>$user_id->id,
+            'academic_class_id'=>2,
 
             'en' => [
-                'first_name' => 'Omar',
+                'first_name' =>'Omar',
                 'middle_name'=>'Nabil',
-                'gender'=>'male',
                 'religion'=>'muslim',
                 'nationality'=>'egyption',
                 'father_first_name'=>'Nabil',

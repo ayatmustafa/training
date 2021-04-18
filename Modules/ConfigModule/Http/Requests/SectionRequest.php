@@ -15,7 +15,7 @@ class SectionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'division_id'=>'required|exists:divisions,id',
+            'division_id'=>'required',
         ];
     }
 

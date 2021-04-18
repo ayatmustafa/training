@@ -2,6 +2,7 @@
 
 use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Modules\Teacher\Entities\SectionCoordinator;
 
 class RolesTableSeeder extends Seeder
 {
@@ -27,5 +28,10 @@ class RolesTableSeeder extends Seeder
             'display_name' => 'Student',
             'description' => 'entires student side',
         ]);
+        $Section_Coordinator = Role::firstOrCreate([
+            'name' => 'SectionCoordinator',
+            'display_name' => 'SectionCoordinator',
+            'description' => 'create Agenta to section',
+        ]);   
     }
 }

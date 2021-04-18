@@ -63,7 +63,6 @@ class UsersTableSeeder extends Seeder
 
 
 
-
        $student2= User::firstOrCreate([
             'email'=>'omar.nabil65@gmail.com',
         ],[
@@ -73,6 +72,21 @@ class UsersTableSeeder extends Seeder
         ]);
         $student2->roles()->sync([]);
         $student2->syncRoles(["Student"]);
+
+
+
+
+
+        $SectionCoordinator= User::firstOrCreate([
+            'email'=>'yasmin.hamouda@gmail.com',
+            
+        ],[
+            'name'=>'yasmin',
+            
+            'password'=>bcrypt('12345678')
+        ]);
+        $SectionCoordinator->roles()->sync([]);
+        $SectionCoordinator->syncRoles(["SectionCoordinator","teacher"]);
 
     } // en of run
 } // end of seeder

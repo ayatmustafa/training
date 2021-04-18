@@ -15,10 +15,10 @@ class Student extends Model implements TranslatableContract
     protected $fillable = ['gender','father_contact_mobile','father_contact_telephone',
     'father_contact_email_official','father_birth_date','father_occupation','mother_contact_mobile',
     'mother_contact_email_official','official_email','mother_birth_date','mother_occupation',
-    'division_id','grade_id','school_id','user_id','birth_date','code','section_id'];
+    'division_id','grade_id','school_id','user_id','birth_date','code','section_id','academic_class_id'];
    
    
-    public $translatedAttributes = ['first_name','middle_name','gender','religion',
+    public $translatedAttributes = ['first_name','middle_name','religion',
     'nationality','father_first_name','father_middle_name','father_last_name',
     'father_religion','father_nationality','father_address','mother_first_name',
     'mother_middle_name','mother_last_name',

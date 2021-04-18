@@ -40,15 +40,17 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('school_id')->unsigned();
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->bigInteger('section_id')->unsigned();
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('no action')->onUpdate('no action');
+
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('academic_class_id')->constrained();
+            $table->foreignId('academic_class_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
         Schema::create('students_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('middle_name');
-            $table->enum('gender', ["male", "female"])->default("male");
             $table->string("religion")->nullable();
             $table->string("nationality")->nullable();
             $table->string("father_first_name");
