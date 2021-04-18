@@ -5,6 +5,7 @@ namespace Modules\ConfigModule\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Modules\ConfigModule\Http\Requests\AcademicClassRequest;
 use Modules\ConfigModule\Http\Requests\AcademicClassUpdateRequest;
 use Modules\ConfigModule\Repositories\AcademicClassRepositoryInterface;
@@ -39,10 +40,12 @@ class AcademicClassController extends Controller
 public function store(AcademicClassRequest $request)
     {
         // enhancement renaame the var to $storedClass
-        $storedClass = $this->academicClassesRepository->store($request);
+        $userId = Auth::user()->id;
+        $data = array_merge($request->all(),["user_id" => $userId]);
+        $storedAcademicClass = $this->academicClassesRepository->store($data);
         return response()->json([
             'status' => 'success',
-            'data'   => new AcademicClassResource($storedClass)
+            'data'   => new AcademicClassResource($storedAcademicClass)
         ]);
     }
 
@@ -56,7 +59,7 @@ public function store(AcademicClassRequest $request)
         $getAcademicClass = $this->academicClassesRepository->show($id);
         return response()->json([
             'status' => 'success',
-            'data'   => new AcademicClassResource($getAcademicClass)
+            'data'   => $getAcademicClass !== null ? new AcademicClassResource($getAcademicClass) : $getAcademicClass
         ]);
     }
     /**
@@ -70,7 +73,7 @@ public function store(AcademicClassRequest $request)
         $updatedAcademicClass = $this->academicClassesRepository->update($request, $id);
         return response()->json([
             'status' => 'success',
-            'data'   => $updatedAcademicClass,
+            'data'   => $updatedAcademicClass !==null ? new AcademicClassResource($updatedAcademicClass) : $updatedAcademicClass,
         ]);
     }
 

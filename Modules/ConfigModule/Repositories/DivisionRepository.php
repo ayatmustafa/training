@@ -14,22 +14,21 @@ class DivisionRepository implements DivisionRepositoryInterface
     {
         // this could be return Division::all(); no need to define variable
       return  Division::all();
-      
+
     }
     public function divisionBySchoolId($school_id)
     {
         // enhancement try to ask ayat for help here this is the DivisionRepository we should not call School Model
         // this logic should api should call the SchoolController -> SchoolRepository to get divisions via School Model relationship
-       
+
         return Division::where('school_id',$school_id)->get();
-     
     }
 
-   
+
     public function store($request)
      {
          // enhancement there should be no commented code
- 
+
         $data               =$request->all();
         $data['school_id']  = $request->school_id;
         $division           =Division::create($data);

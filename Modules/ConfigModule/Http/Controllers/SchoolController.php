@@ -83,7 +83,7 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-        $deletedSchool =  $this->schoolRepo->destroy($id);  
+        $deletedSchool =  $this->schoolRepo->destroy($id);
         return response()->json([
             'status' => 'success',
             'data'   => $deletedSchool

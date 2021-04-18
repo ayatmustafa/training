@@ -18,7 +18,7 @@ class AcademicClassUpdateRequest extends FormRequest
             'division_id' => 'required|exists:divisions,id',
             'grade_id'    => 'required|exists:grades,id',
             // enhancement $this->grad_id  grad_id is wrong
-            'name'        => ['string','required',Rule::unique('academic_classes', 'name')->ignore($this->grad_id, 'grade_id')],
+            'name'        => ['string','required',Rule::unique('academic_classes', 'name')->ignore($this->grade_id, 'grade_id')],
             'user_id'     => 'exists:users,id',
         ];
     }

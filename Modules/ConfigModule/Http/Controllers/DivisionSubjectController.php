@@ -43,7 +43,7 @@ class DivisionSubjectController extends Controller
         $storedDivisionSubject = $this->divisionSubjectRepo->store($data);
         return response()->json([
             "status" => "success",
-            "data"   =>  new DivisionSubjectResource($storedDivisionSubject)
+            "data"   => $storedDivisionSubject  !== null ? new DivisionSubjectResource($storedDivisionSubject) : $storedDivisionSubject
         ]);
     }
 
@@ -71,7 +71,6 @@ class DivisionSubjectController extends Controller
         $updatedDivisionSubject = $this->divisionSubjectRepo->update($request, $id);
         return response()->json([
             "status" => "status",
-            // "data"   => $updatedDivisionSubject
             "data"   => $updatedDivisionSubject !== null ? new DivisionSubjectResource($updatedDivisionSubject) : $updatedDivisionSubject
         ]);
     }

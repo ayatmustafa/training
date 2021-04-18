@@ -16,11 +16,14 @@ class AcademicClassRequest extends FormRequest
         return [
             'division_id' => 'required|exists:divisions,id',
             'grade_id'    => 'required|exists:grades,id',
-            'name'        => 'string|required|unique:classes,name',
+            'name'        => 'string|required|unique:academic_classes,name',
             'user_id'    => 'exists:users,id',
         ];
     }
-
+    public function messages()
+    {
+        return ['name.unique' => 'this class already exists'];
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
