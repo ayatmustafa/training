@@ -28,14 +28,12 @@ class SectionRepository implements SectionRepositoryInterface
     {   
         $configs=Configuration::where('key','locales')->first();
         $section = Section::where('id', $section_id)->first();
-        // $data=$request->all();
            foreach( $configs->value as $value){
-            //  $data='name:'.$value;
              $data['name:'.$value]=$request->name;
-             $section->update(array_merge($request->all(),['name'=>$data]));
-
            }
-        return $section;
+           $section->update(array_merge($request->all(),$data));
+
+            return $section;
     }
     public function getSectionByDivision($division_id)
     {

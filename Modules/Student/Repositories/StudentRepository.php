@@ -26,7 +26,7 @@ class StudentRepository implements StudentRepositoryInterface
 
     return Student::where('id', $student_id)->first();
   }
-  public function Update($student_id, $studentdata)
+  public function Update($student_id,$studentdata)
   {
     $student = Student::where('id', $student_id)->first();
     $student->update($studentdata->all());

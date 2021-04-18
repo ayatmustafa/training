@@ -14,7 +14,7 @@ class UpdateSectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'division_id' => 'required|exists:divisions,id',
+             'division_id' => 'required',
         ];
         }
 

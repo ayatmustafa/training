@@ -28,11 +28,15 @@ class AcademicClass extends Model
         return $this->belongsTo(Division::class);
     }
     public function students() {
-        return $this->hasMany(Student::class,'class_id');
+        return $this->hasMany(Student::class,'academic_class_id');
     }
     // enhancement name should be teacherClass camel case
     public function teacherClass() {
         return $this->hasMany(ClassTeacher::class,'academic_class_id');
+    }
+    public function agendas()
+    {
+        return $this->belongsToMany(ِAgenda::class,'AgendaClasses','academic_class_id','coordinator_section_id');
     }
 
 }

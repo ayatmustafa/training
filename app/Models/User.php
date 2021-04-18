@@ -10,6 +10,7 @@ use Modules\ConfigModule\Entities\School;
 use Laratrust\Traits\LaratrustUserTrait;
 use Modules\OnlineClasses\Entities\OnlineClass;
 use Modules\Student\Entities\Student;
+use Modules\Teacher\Entities\Agenda;
 
 class User extends Authenticatable  
 {
@@ -51,6 +52,10 @@ class User extends Authenticatable
     }
     public function student() {
         return $this->belongsTo(Student::class, 'user_id');
+    }
+    public function agendas()
+    {
+        return $this->hasMany(ِAgenda::class, "coordinator_section_id");
     }
 }
 
