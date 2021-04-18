@@ -13,20 +13,20 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Sections', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('status',["active","inactive"])->default("inactive");
-            $table->biginteger('division_id')->unsigned();
-            $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');;
+            $table->bigInteger('division_id')->unsigned();
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
-        Schema::create('Sections_translations', function (Blueprint $table) {
+        Schema::create('sections_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('locale')->index();
             $table->unique(['section_id', 'locale']);
             $table->bigInteger('section_id')->unsigned();
-            $table->foreign('section_id')->references('id')->on('Sections')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade')->onUpdate('cascade');
           $table->timestamps();
         });
     }

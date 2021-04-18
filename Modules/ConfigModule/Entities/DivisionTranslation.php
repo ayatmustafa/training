@@ -9,9 +9,5 @@ class DivisionTranslation extends Model
 {
 
     protected $fillable = ['name','division_id',"locale"];
-    protected $table = 'division_translations';
-    protected $hidden   =  ['created_at', 'updated_at'];
-
-    public $timestamps = false;
-   
+    protected $hidden   = ['created_at', 'updated_at'];   
 }

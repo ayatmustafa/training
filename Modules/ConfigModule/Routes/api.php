@@ -14,38 +14,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 // remove this block
-// Route::middleware('auth:api')->get('/ConfigModule', function (Request $request) {
-//    return $request->user();
-//});
-
 /*--------------------------------------------------------------------------
 |                               SCHOOL CRUD APIs                            |
 |--------------------------------------------------------------------------*/
 
 Route::group(['prefix' => '/ConfigModule', 'middleware' => ['auth:api', 'role:SMD', 'cors', 'json']], function () {
     // replace all five crud routes with resource ask ayat for help
-    Route::apiResource('/Schools', 'SchoolController');
-    /*----------------------------------------------------------------------------
+    Route::resource('/schools', 'SchoolController');
+/*----------------------------------------------------------------------------
 |                               AcademicClasses CRUD APIs                    |
 |--------------------------------------------------------------------------*/
-    Route::apiResource('/AcademicClasses', 'AcademicClassController');
-    /*----------------------------------------------------------------------------
+    Route::resource('/classes', 'AcademicClassController');
+/*----------------------------------------------------------------------------
 |                               DivisionSubjects CRUD APIs                   |
 |--------------------------------------------------------------------------*/
-    Route::apiResource('/DivisionSubject', 'DivisionSubjectController');
+    Route::apiResource('/divisionSubjects', 'DivisionSubjectController');
 
     // wrong naming for prefix should be /divisions and you should use resource and the default resource function names ask ayat to help
  /*----------------------------------------------------------------------------
-|                               Divisions CRUD APIs                   |
+|                               Divisions CRUD APIs                          |
 |--------------------------------------------------------------------------*/
     Route::apiResource('/divisions', 'DivisionController');
     Route::get('/division-byid/{school_id}', 'DivisionController@divisionBySchoolId');
 
 
-   
 
-    /*----------------------------------------------------------------------------
-|                               Sections CRUD APIs                   |
+
+/*----------------------------------------------------------------------------
+|                               Sections CRUD APIs                           |
 |--------------------------------------------------------------------------*/
 
     //    prefix should be plural like /sections
@@ -56,7 +52,7 @@ Route::group(['prefix' => '/ConfigModule', 'middleware' => ['auth:api', 'role:SM
     });
 
  /*----------------------------------------------------------------------------
-|                               Grades CRUD APIs                   |
+|                               Grades CRUD APIs                             |
 |--------------------------------------------------------------------------*/
 
     Route::apiResource('/grades', 'GradeController');

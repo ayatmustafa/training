@@ -22,7 +22,7 @@ class SchoolResource extends JsonResource
             'short_name'  => $this->short_name,
             'branch_name' => $this->branch_name,
             'contacts'    => $this->contacts,
-            'school_divisions' => $this->divisions->pluck('name'),
+            'divisions'   => $this->divisions,
             "lang"        => $this->translate(config('app.locale')), 
         ];
     }

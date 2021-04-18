@@ -10,23 +10,22 @@ use Modules\ConfigModule\Repositories\AcademicClassRepositoryInterface;
 // enhancement class name should be Singular like ClassRepository and also the interface and models
 class AcademicClassRepository implements AcademicClassRepositoryInterface
 {
-    protected $class;
-    public function __construct(AcademicClass $class)
+    protected $academicClass;
+    public function __construct(AcademicClass $academicClass)
     {
-        $this->academicClass = $class;
+        $this->academicClass = $academicClass;
     }
     public function index() {
         return $this->academicClass->all();
     }
     public function show($id) {
-        return $this->class-> find($id);
+        return $this->academicClass->find($id);
     }
     public function store($data) {
         // enhancement this request data handling should be in service class or at least in the controller the repo function only is to interact with db
         //you should pass this $data ready from the right place to here
-        // $data =  $request->all();
         //this var should be $class
-        $class = AcademicClass::create($data);
+        $class = $this->academicClass->create($data);
         return $class;
     }
     public function update($request,$id) {
@@ -39,17 +38,15 @@ class AcademicClassRepository implements AcademicClassRepositoryInterface
          * the repo only job is to interact with db not to handle any logic
          */
 
-        $isUpdated = AcademicClass::whereId($id)->first();
+        $isUpdated = $this->academicClass->whereId($id)->first();
         if($isUpdated !== null){
             $isUpdated->update($request->all());
-            return $isUpdated;
+        return $isUpdated;
         }
-        return "not exists";
     }
     public function destroy($id) {
-        $classes = $this->classes->find($id);
-        if($classes !== null)
-            return $classes->delete();
-        return "not exists";
+        $isDeleted = $this->academicClass->find($id);
+        if($isDeleted !== null)
+            return $isDeleted->delete();
     }
 }

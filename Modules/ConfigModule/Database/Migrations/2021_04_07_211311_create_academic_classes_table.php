@@ -15,10 +15,10 @@ class CreateAcademicClassesTable extends Migration
     {
         Schema::create('academic_classes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('division_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('grade_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('division_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('grade_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name')->nullable();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

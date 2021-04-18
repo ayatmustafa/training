@@ -16,10 +16,10 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->biginteger('division_id')->unsigned();
-            $table->foreign('division_id')->references('id')->on('Divisions')->onDelete('no action')->onUpdate('no action');;
+            $table->bigInteger('division_id')->unsigned();
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade')->onUpdate('cascade');;
             $table->bigInteger('section_id')->unsigned();
-            $table->foreign('section_id')->references('id')->on('Sections')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
        
