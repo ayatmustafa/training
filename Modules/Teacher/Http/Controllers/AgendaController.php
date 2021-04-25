@@ -45,6 +45,14 @@ class AgendaController extends Controller
         $all_agenda= $this->AgendaRepository->studentsAgenda();
         return response()->json(['status'=>'success','data'=>$all_agenda]);
     }
+    public function show(Request $id)
+    {
+        $agenda= $this->AgendaRepository->show($id);
+        return response()->json(['status'=>'success','data'=>$agenda]);
+    }
+
+
+
     public function create()
     {
         return view('teacher::create');
@@ -55,40 +63,11 @@ class AgendaController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    
+    public function update(Request $request,$id)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('teacher::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('teacher::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $agenda= $this->AgendaRepository->update($request,$id);
+        return response()->json(['status'=>'success','data'=>$agenda]);
     }
 
     /**
