@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\ConfigModule\Http\Requests\SectionRequest;
 use Modules\ConfigModule\Http\Requests\UpdateSectionRequest;
+use Modules\ConfigModule\Transformers\SchoolResource;
+use Modules\ConfigModule\Transformers\SectionResource;
 
 // enhancement rename all vars and functions like in ClassesController
 class SectionController extends Controller
@@ -22,7 +24,7 @@ class SectionController extends Controller
     public function index()
     {
         $getAllSections = $this->SectionRepository->index();
-        $data = ["status" => "success", "data" => $getAllSections];
+        $data = ["status" => "success", "data" =>SectionResource::collection( $getAllSections)];
         return response()->json($data, 200);
     }
     public function store(SectionRequest $sectionData)

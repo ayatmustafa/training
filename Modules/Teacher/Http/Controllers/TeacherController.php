@@ -18,7 +18,25 @@ class TeacherController extends Controller
     public function store(SectionCoordinatorRequest $req)
     {
         $SectionCoordinator = $this->SectionCoordinatorRepository->store($req);
-        $data = ["status" => "success", "data" =>$SectionCoordinator];
+        $data = ["status" => "success", "data" => $SectionCoordinator];
+        return response()->json($data, 200);
+    }
+    public function show($id)
+    {
+        $SectionCoordinator = $this->SectionCoordinatorRepository->show($id);
+        $data = ["status" => "success", "data" => $SectionCoordinator];
+        return response()->json($data, 200);
+    }
+    public function update($id,SectionCoordinatorRequest $req)
+    {
+        $SectionCoordinator = $this->SectionCoordinatorRepository->update($id, $req);
+        $data = ["status" => "success", "data" => $SectionCoordinator];
+        return response()->json($data, 200);
+    }
+    public function destroy($id)
+    {
+        $SectionCoordinator = $this->SectionCoordinatorRepository->destroy($id);
+        $data = ["status" => "success", "data" => $SectionCoordinator];
         return response()->json($data, 200);
     }
 }
