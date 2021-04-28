@@ -1,99 +1,60 @@
 <?php
 
-
 namespace Modules\OnlineClasses\Repositories;
 
-use Illuminate\Support\Facades\Auth;
+use DateTime;
+use Illuminate\Support\Facades\Notification;
 use Modules\OnlineClasses\Repositories\OnlineClassRepositoryInterface;
 use Modules\OnlineClasses\Entities\OnlineClass;
-use Modules\OnlineClasses\Traits\ZoomJWT;
+use Modules\OnlineClasses\Notifications\NotifyStudentOfNewOnlineClass;
 
 class OnlineClassRepository implements OnlineClassRepositoryInterface
 {
-    use ZoomJWT;
-    const MEETING_TYPE_INSTANT = 1;
-    const MEETING_TYPE_SCHEDULE = 2;
-    const MEETING_TYPE_RECURRING = 3;
-    const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
     protected $onlineClass;
     public function __construct(OnlineClass $onlineClass)
     {
         $this->onlineClass = $onlineClass;
     }
-
     public function index($request) {
         $start_date = date($request->start_date);
-        $end_date = date($request->end_date);
+        $end_date   = date($request->end_date);
         if($request->start_date != null && $request->end_date != null) {
-            return  $this->onlineClass->WhereBetween('date',[$start_date, $end_date])
+            return  $this->onlineClass->WhereBetween('date', [$start_date, $end_date])
             ->get();
         }
         return  $this->onlineClass->get();
-        
     }
     public function show($id) {
         return $this->onlineClass->find($id);
     }
-    public function store($request) {    
-        $path = 'users/me/meetings';
-        $response = $this->zoomPost($path, [
-            'type' => self::MEETING_TYPE_SCHEDULE,
-            'class_start_time' => $this->toZoomTimeFormat($request['date']."".$request['class_start_time']),
-            'duration' => 40,
-            'settings' => [
-                'host_video' => false,
-                'participant_video' => false,
-                'waiting_room' => true,
-            ]
-        ]);
-        $userId = Auth::user()->id;     
-        $zoom_response = json_decode($response);
-        $zoom_online_class = [
-            'user_id'         => $userId, 
-            'zoom_meeting_id' => $zoom_response->id, 
-            'duration'        => $zoom_response->duration,
-        ];
-        
-        $data = array_merge($request->all(), $zoom_online_class);
+    public function store($data) {
         $onlineClasses = $this->onlineClass->create($data);
+        $onlineClasses->subjects->name;
         $onlineClasses->zoomOnlineClasses()->create([
-            "user_id"        => $userId,
-            "status"         => $zoom_response->status
+            "user_id"        => $data['user_id'],
+            "status"         => $onlineClasses->status === 1 ? "active" : "archived"
         ]);
+        $students = $onlineClasses->class->students->pluck('user');
+        $d = new DateTime($data['date']);
+        $onlineClassNotificationDetails = [
+            'greeting' => 'HELLO',
+            'teacher'  => $onlineClasses->class->user->name,
+            'body'     => $onlineClasses->subjects->name.' Online class starting at '.$d->format('l Y m d').' '.$data['class_start_time'],
+            'join_url' => $data['join_url'],
+            'thanks'   => 'thank you.',
+            'action'   => url('/'),
+        ];
+        Notification::send($students, new NotifyStudentOfNewOnlineClass($onlineClassNotificationDetails));
         return $onlineClasses;
     }
-    public function update($request,$id) {
-         $onlineClasses = $this->onlineClass->find($id);
+    public function update($data, $onlineClasses) {
         if($onlineClasses !== null) {
-            $path = 'meetings/' . $onlineClasses->zoom_meeting_id;
-            $response = $this->zoomPatch($path, [
-                'type' => self::MEETING_TYPE_SCHEDULE,
-                'zoom_meeting_start_time' => (new \DateTime($request['zoom_meeting_start_time']))->format('Y-m-d'),
-                'duration' => 40,
-                'settings' => [
-                    'host_video' => false,
-                    'participant_video' => false,
-                    'waiting_room' => true,
-                ]
-            ]);
-             $zoom_response =  json_decode($response);
-             $zoom_online_class = [
-                 "start_time" => $request->zoom_meeting_start_time,
-             ];
-             $data = array_merge($request->all(), ["user_id"=> Auth::user()->id, $zoom_online_class]);
             $onlineClasses->update($data);
-            return $onlineClasses;
+            $onlineClasses->zoomOnlineClasses()->update(['status' =>  $onlineClasses->status === 1 ? "active" : "archived"]);
+        return $onlineClasses;
         }
-            
-        return "not exists";
     }
-    public function destroy($id) {
-        $onlineClass = $this->onlineClass->find($id);
-        if($onlineClass !== null) {
-            $path = 'meetings/' . $onlineClass->zoom_meeting_id;
-            $this->zoomDelete($path);
-            return $onlineClass->delete();
-        }
-        return "not exists";
+    public function destroy($onlineClass) {
+        return $onlineClass->delete();
     }
 }

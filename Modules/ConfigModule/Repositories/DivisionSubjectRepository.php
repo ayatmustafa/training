@@ -26,7 +26,7 @@ class DivisionSubjectRepository implements DivisionSubjectRepositoryInterface
             return;
         // enhancement remove this commented code and move all this logic to service or controller and just start to work on the passed data array
         $storeDivisionSubject = $this->divisionSubject->create($data);
-            $storeDivisionSubject->gradeSubjects()->createMany(
+            $storeDivisionSubject->grades()->attach(
                 $data["gradeIds"]
             );
         return $storeDivisionSubject;

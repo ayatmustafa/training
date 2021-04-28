@@ -12,10 +12,10 @@ class SchoolRepository implements SchoolRepositoryInterface
         $data = [];
         $lang = Configuration::where('key', 'locales')->first();
         foreach($lang->value as $key) {
-            $data['short_name:'.$key]=$request['short_name'];
-            $data['long_name:'.$key]=$request['long_name'];
-            $data['branch_name:'.$key]=$request['branch_name'];
-            $data['address:'.$key]=$request['address'];
+            $data['short_name:'.$key]  = $request['short_name'];
+            $data['long_name:'.$key]   = $request['long_name'];
+            $data['branch_name:'.$key] = $request['branch_name'];
+            $data['address:'.$key]     = $request['address'];
         }
         return $data;
     }
