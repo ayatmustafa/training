@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\OnlineClasses\Http\Controllers\OnlineClassesController;
 
@@ -28,10 +27,5 @@ Route::group(['prefix' => '/OnlineClasses','middleware' => ['auth:api','cors', '
 /*--------------------------------------------------------------------------
 |               SCHOOL CRUD APIs with TEACHER AND SMD ROLE                  |
 |--------------------------------------------------------------------------*/
-    Route::middleware(['role:SMD|TEACHER'])->group(function () {
-        Route::get('/edit/{class}',     [OnlineClassesController::class, 'edit']);
-        Route::post('/store',           [OnlineClassesController::class, 'store']);
-        Route::patch('/update/{class}', [OnlineClassesController::class, 'update']);
-        Route::delete('/delete/{class}',[OnlineClassesController::class, 'destroy']);
-    });
+        Route::resource('/onlineClasses',     'OnlineClassesController')->middleware(['role:SMD|TEACHER']);
 });

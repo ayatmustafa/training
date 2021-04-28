@@ -14,9 +14,10 @@ class OnlineClassUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "date"            => 'required|date|after_or_equal:today',
-            "class_start_time"      => "required|date_format:H:i:s",
-            "class_end_time"        => "required|date_format:H:i:s|after:class_start_time",
+            "date"              => 'required|date|after_or_equal:today',
+            "class_start_time"  => "required|date_format:H:i:s",
+            "class_end_time"    => "required|date_format:H:i:s|after:class_start_time",
+            'academic_class_id' => 'exists:academic_classes,id'
         ];
     }
 
